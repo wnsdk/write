@@ -1,35 +1,23 @@
-import { useState } from 'react'
-import reactLogo from './assets/react.svg'
-import viteLogo from '/vite.svg'
-import './App.css'
+import './App.css';
+import { Routes, Route } from 'react-router-dom';
+import Header from '@/components/Header';
+import MainPage from '@/pages/MainPage';
+import TestPage from '@/pages/TestPage';
 
 function App() {
-  const [count, setCount] = useState(0)
+    return (
+        <>
+            <Routes>
+                <Route element={<Header />}>
+                    {/* 헤더, 푸터와 같은 요소와 함께 보여질 페이지들은 여기에 */}
+                    <Route path="/" element={<MainPage />} />
+                </Route>
 
-  return (
-    <>
-      <div>
-        <a href="https://vitejs.dev" target="_blank">
-          <img src={viteLogo} className="logo" alt="Vite logo" />
-        </a>
-        <a href="https://react.dev" target="_blank">
-          <img src={reactLogo} className="logo react" alt="React logo" />
-        </a>
-      </div>
-      <h1>Vite + React</h1>
-      <div className="card">
-        <button onClick={() => setCount((count) => count + 1)}>
-          count is {count}
-        </button>
-        <p>
-          Edit <code>src/App.jsx</code> and save to test HMR
-        </p>
-      </div>
-      <p className="read-the-docs">
-        Click on the Vite and React logos to learn more
-      </p>
-    </>
-  )
+                {/* 단독으로 보여질 페이지들은 여기에 */}
+                <Route path="/test" element={<TestPage />} />
+            </Routes>
+        </>
+    );
 }
 
-export default App
+export default App;

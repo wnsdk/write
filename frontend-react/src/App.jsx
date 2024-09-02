@@ -15,8 +15,7 @@ function App() {
             <Routes>
                 <Route element={<Header />}>
                     {/* 헤더, 푸터와 같은 요소와 함께 보여질 페이지들은 여기에 */}
-                    <Route path="/" element={<MainPage />} />
-                    <Route path="/login" element={<LoginPage />} />
+                    <Route path="/oauth/redirect" element={<MainPage />} />
                     <Route path="/manuscript" element={<ManuscriptPage />} />
                     <Route path="/writing" element={<WritingPage />} />
                     <Route path="/correction" element={<CorrectionPage />} />
@@ -24,6 +23,7 @@ function App() {
                 </Route>
 
                 {/* 단독으로 보여질 페이지들은 여기에 */}
+                <Route path="/login" element={<LoginPage />} />
                 <Route path="/test" element={<TestPage />} />
             </Routes>
         </>

@@ -12,7 +12,7 @@ pipeline{
 
         stage('Gradle Build'){
             steps{
-                dir('write-be/'){
+                dir('backend/'){
                     sh 'ls'
                     sh 'chmod +x ./gradlew'
                     sh './gradlew clean build'

@@ -1,0 +1,41 @@
+pipeline{
+    agent any
+    
+    stages{
+        stage('Clone Repo'){
+            steps{
+                git url: 'https://github.com/wnsdk/write.git',
+                    credentialsId: 'wnsdk', // Jenkins에서 설정한 credential의 ID
+                    branch: 'main-back'
+            }
+        }
+
+        stage('Gradle Build'){
+            steps{
+                dir('write-be/'){
+                    sh 'ls'
+                    sh 'chmod +x ./gradlew'
+                    sh './gradlew clean build'
+                }
+            }
+        }
+
+        stage('Build Docker'){
+            steps{
+                script{
+                    sh "docker build -t :${env.BUILD_NUMBER} write-be/"
+                }
+            }
+        }
+
+        stage('Deploy Docker'){
+            steps{
+                script{
+                    sh "docker stop write-be || true && docker rm back-concert || true"
+                    sh "docker run --name write-be -d --network connect-default write-be:${env.BUILD_NUMBER}"
+                    sh "docker image prune -a -f || true"
+                }
+            }
+        }
+    }
+}

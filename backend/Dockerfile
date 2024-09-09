@@ -3,6 +3,8 @@ FROM openjdk:17-jdk-slim-buster
 
 # gradle 빌드 시 jar 파일 생성 경로
 ARG JAR_FILE=./build/libs/*.jar
+ARG JASYPT_ENCRYPTOR_PASSWORD
+ENV JASYPT_ENCRYPTOR_PASSWORD=${JASYPT_ENCRYPTOR_PASSWORD}
 
 # JAR_FILE을 메인 디렉토리에 복사
 COPY ${JAR_FILE} app.jar

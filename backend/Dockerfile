@@ -10,4 +10,4 @@ ENV JASYPT_ENCRYPTOR_PASSWORD=${JASYPT_ENCRYPTOR_PASSWORD}
 COPY ${JAR_FILE} app.jar
 
 # 시스템 진입점
-ENTRYPOINT ["java","-jar","app.jar", "--spring.profiles.active=prod"]
+ENTRYPOINT ["java","-jar","app.jar", "--spring.profiles.active=prod", "${JAVA_OPTS}"]

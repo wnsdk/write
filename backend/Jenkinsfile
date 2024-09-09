@@ -32,7 +32,7 @@ pipeline{
                 dir('backend/'){
                     sh 'ls'
                     sh 'chmod +x ./gradlew'
-                    sh './gradlew clean build -Djasypt.encryptor.password=${JASYPT_KEY} -x test'
+                    sh './gradlew clean build -x test'
                 }
             }
         }
@@ -40,7 +40,7 @@ pipeline{
         stage('Build Docker'){
             steps{
                 script{
-                    sh "docker build -t ${IMAGE_NAME}:${env.BUILD_NUMBER} backend/"
+                    sh "docker build -t ${IMAGE_NAME}:${env.BUILD_NUMBER} --build-arg JASYPT_KEY=${JASYPT_KEY} backend/"
                 }
             }
         }

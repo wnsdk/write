@@ -20,7 +20,7 @@ import static org.junit.jupiter.api.Assertions.*;
 
 @SpringBootTest(classes = WriteApplication.class)
 //@TestPropertySource(locations = "classpath:application-test.yml")
-@ActiveProfiles("test")
+//@ActiveProfiles("test")
 class UserServiceImplTest {
 
     @Autowired

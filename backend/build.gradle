@@ -64,5 +64,6 @@ dependencies {
 
 tasks.named('test') {
 	useJUnitPlatform()
+	systemProperty 'spring.profiles.active', 'test'
 	systemProperty "jasypt.encryptor.password", System.getProperty("jasypt.encryptor.password")
 }

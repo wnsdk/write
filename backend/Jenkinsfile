@@ -30,8 +30,6 @@ pipeline{
         stage('Gradle Build'){
             steps{
                 dir('backend/'){
-                    sh 'ls'
-                    sh 'chmod +x ./gradlew'
                     sh './gradlew clean build -Djasypt.encryptor.password=${JASYPT_KEY} -x test'
                 }
             }
@@ -49,11 +47,10 @@ pipeline{
             steps{
                 script {
                     // 기존 컨테이너가 있으면 중지하고 삭제
-                    sh "docker stop ${CONTAINER_NAME} || true"
-                    sh "docker rm ${CONTAINER_NAME} || true"
+                    sh "docker rm -f ${CONTAINER_NAME} || true"
 
                     // 새로운 Docker 컨테이너 실행
-                    sh "docker run --name ${CONTAINER_NAME} -d ${IMAGE_NAME}:${env.BUILD_NUMBER} -e JASYPT_KEY=${JASYPT_KEY}"
+                    sh "docker run --name ${CONTAINER_NAME} -d ${IMAGE_NAME}:${env.BUILD_NUMBER}"
 
                     // 사용하지 않는 Docker 이미지를 정리
                     sh "docker image prune -a -f || true"

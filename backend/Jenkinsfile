@@ -1,0 +1,70 @@
+pipeline{
+    agent any
+
+    environment {
+        IMAGE_NAME = "write-be"
+        CONTAINER_NAME = "write-be"
+    }
+
+    stages{
+        stage('Clone Repo'){
+            steps{
+                git url: 'https://github.com/wnsdk/write.git',
+                    credentialsId: 'github-credential', // Jenkins에서 설정한 credential의 ID
+                    branch: 'main-be'
+            }
+        }
+
+        stage('Deployment Test') {
+            steps {
+                echo 'Running Deployment Test...'
+                dir('backend/') {
+                    sh './gradlew test -Dspring.profiles.active=deploy-test'
+                }
+            }
+        }
+
+        stage('Gradle Build'){
+            steps{
+                dir('backend/'){
+                    sh 'ls'
+                    sh 'chmod +x ./gradlew'
+                    sh './gradlew clean build -Dspring.profiles.active=prod'
+                }
+            }
+        }
+
+        stage('Build Docker'){
+            steps{
+                script{
+                    sh "docker build -t ${IMAGE_NAME}:${env.BUILD_NUMBER} backend/"
+                }
+            }
+        }
+
+        stage('Deploy Docker'){
+            steps{
+                script {
+                    // 기존 컨테이너가 있으면 중지하고 삭제
+                    sh "docker stop ${CONTAINER_NAME} || true"
+                    sh "docker rm ${CONTAINER_NAME} || true"
+
+                    // 새로운 Docker 컨테이너 실행
+                    sh "docker run --name ${CONTAINER_NAME} -d --network connect-default ${IMAGE_NAME}:${env.BUILD_NUMBER}"
+
+                    // 사용하지 않는 Docker 이미지를 정리
+                    sh "docker image prune -a -f || true"
+                }
+            }
+
+            post {
+                success {
+                    echo 'Deployment completed successfully.'
+                }
+                failure {
+                    echo 'Deployment failed.'
+                }
+            }
+        }
+    }
+}

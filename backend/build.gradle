@@ -40,7 +40,7 @@ dependencies {
 	runtimeOnly 'com.h2database:h2'
 
 	//MySQL
-	implementation 'mysql:mysql-connector-java:8.0.32'
+	runtimeOnly 'com.mysql:mysql-connector-j'
 
 	//Spring Security
 	implementation 'org.springframework.boot:spring-boot-starter-security'

@@ -47,12 +47,13 @@ pipeline{
         stage('Deploy Docker'){
             steps{
                 script {
+                    echo 'jasypt key is ${JASYPT_KEY}'
                     // 기존 컨테이너가 있으면 중지하고 삭제
                     sh "docker rm -f ${CONTAINER_NAME} || true"
 
                     // 새로운 Docker 컨테이너 실행
                     sh "docker run --name ${CONTAINER_NAME} -d ${IMAGE_NAME}:${env.BUILD_NUMBER} -e JASYPT_ENCRYPTOR_PASSWORD=${JASYPT_KEY} -e JAVA_OPTS='-Djasypt.encryptor.password=${JASYPT_KEY}'"
-
+                    
                     // 사용하지 않는 Docker 이미지를 정리
                     sh "docker image prune -a -f || true"
                 }

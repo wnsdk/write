@@ -1,6 +1,6 @@
 spring:
   datasource:
-    url: jdbc:mysql://localhost:3306/write_db
+    url: jdbc:mysql://write-db:3306/write_db
     username: write
     password: write
     driver-class-name: com.mysql.cj.jdbc.Driver

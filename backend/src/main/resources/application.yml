@@ -27,7 +27,6 @@ jwt:
 jasypt:
   encryptor:
     bean: jasyptStringEncryptor
-    password: ${JASYPT_ENCRYPTOR_PASSWORD}
 
 common: common
 test: common

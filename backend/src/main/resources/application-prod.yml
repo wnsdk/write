@@ -6,3 +6,7 @@ spring:
     driver-class-name: com.mysql.cj.jdbc.Driver
 
 test: prod
+
+jasypt:
+  encryptor:
+    password: ${JASYPT_ENCRYPTOR_PASSWORD}

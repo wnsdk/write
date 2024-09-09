@@ -47,7 +47,7 @@ pipeline{
         stage('Deploy Docker'){
             steps{
                 script {
-                    echo 'jasypt key is ${JASYPT_KEY}'
+                    sh "echo 'jasypt key is ${JASYPT_KEY}'"
                     // 기존 컨테이너가 있으면 중지하고 삭제
                     sh "docker rm -f ${CONTAINER_NAME} || true"
 

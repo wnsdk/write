@@ -18,7 +18,7 @@ import org.springframework.test.context.TestPropertySource;
 import static org.junit.jupiter.api.Assertions.*;
 
 @SpringBootTest(classes = WriteApplication.class)
-@TestPropertySource(locations = "classpath:application-test.yml")
+//@TestPropertySource(locations = "classpath:application-test.yml")
 class UserServiceImplTest {
 
     @Autowired

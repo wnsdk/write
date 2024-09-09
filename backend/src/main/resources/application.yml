@@ -1,6 +1,8 @@
 spring:
   application:
     name: write
+  profiles:
+    active: local
   security:
     oauth2:
       client:

@@ -37,7 +37,7 @@ pipeline{
             }
         }
 
-        stage('Build Docker'){
+        stage('Build Docker Image'){
             steps{
                 script{
                     sh "docker build -t ${IMAGE_NAME}:${env.BUILD_NUMBER} --build-arg JASYPT_KEY=${JASYPT_KEY} backend/"
@@ -53,7 +53,7 @@ pipeline{
                     sh "docker rm ${CONTAINER_NAME} || true"
 
                     // 새로운 Docker 컨테이너 실행
-                    sh "docker run --name ${CONTAINER_NAME} -d ${IMAGE_NAME}:${env.BUILD_NUMBER}"
+                    sh "docker run --name ${CONTAINER_NAME} -d ${IMAGE_NAME}:${env.BUILD_NUMBER} -e JASYPT_KEY=${JASYPT_KEY}"
 
                     // 사용하지 않는 Docker 이미지를 정리
                     sh "docker image prune -a -f || true"

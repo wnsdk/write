@@ -4,6 +4,7 @@ pipeline{
     environment {
         IMAGE_NAME = "write-be"
         CONTAINER_NAME = "write-be"
+        JASYPT_KEY = credentials('jasypt-key')
     }
 
     stages{
@@ -21,7 +22,7 @@ pipeline{
                 echo 'Running Deployment Test...'
                 dir('backend/') {
                     sh 'chmod +x ./gradlew'
-                    sh './gradlew clean test -Dspring.profiles.active=deploy-test --info'
+                    sh './gradlew clean test -Dspring.profiles.active=deploy-test -Djasypt.encryptor.password=${env.JASYPT_KEY} --info'
                 }
             }
         }
@@ -31,7 +32,7 @@ pipeline{
                 dir('backend/'){
                     sh 'ls'
                     sh 'chmod +x ./gradlew'
-                    sh './gradlew clean build -Dspring.profiles.active=prod -x test'
+                    sh './gradlew clean build -Dspring.profiles.active=prod -Djasypt.encryptor.password=${env.JASYPT_KEY} -x test'
                 }
             }
         }

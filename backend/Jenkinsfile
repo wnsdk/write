@@ -15,12 +15,13 @@ pipeline{
             }
         }
 
+        // 스프링 테스트 코드를 통과하는지 확인한다.
         stage('Deployment Test') {
             steps {
                 echo 'Running Deployment Test...'
                 dir('backend/') {
                     sh 'chmod +x ./gradlew'
-                    sh './gradlew test -Dspring.profiles.active=deploy-test'
+                    sh './gradlew clean test -Dspring.profiles.active=deploy-test'
                 }
             }
         }
@@ -30,7 +31,7 @@ pipeline{
                 dir('backend/'){
                     sh 'ls'
                     sh 'chmod +x ./gradlew'
-                    sh './gradlew clean build -Dspring.profiles.active=prod'
+                    sh './gradlew clean build -Dspring.profiles.active=prod -x test'
                 }
             }
         }

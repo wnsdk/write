@@ -3,7 +3,6 @@ spring:
     url: jdbc:mysql://localhost:3306/write_db
     username: write
     password: write
-    driver-class-name: com.mysql.cj.jdbc.Driver
   jpa:
     hibernate:
       ddl-auto: create  # or create, create-drop, validate based on your needs

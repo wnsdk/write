@@ -51,7 +51,7 @@ pipeline{
                     sh "docker rm -f ${CONTAINER_NAME} || true"
 
                     // 새로운 Docker 컨테이너 실행
-                    sh "docker run --name ${CONTAINER_NAME} -d ${IMAGE_NAME}:${env.BUILD_NUMBER} -e JASYPT_ENCRYPTOR_PASSWORD=${JASYPT_KEY} -e JAVA_OPTS='-Djasypt.encryptor.password=${JASYPT_KEY}' --network prod-db"
+                    sh "docker run --name ${CONTAINER_NAME} -d ${IMAGE_NAME}:${env.BUILD_NUMBER} --network prod-db -e JASYPT_ENCRYPTOR_PASSWORD=${JASYPT_KEY} -e JAVA_OPTS='-Djasypt.encryptor.password=${JASYPT_KEY}'"
                     
                     // 사용하지 않는 Docker 이미지를 정리
                     sh "docker image prune -a -f || true"

@@ -19,6 +19,7 @@ pipeline{
             steps {
                 echo 'Running Deployment Test...'
                 dir('backend/') {
+                    sh 'chmod +x ./gradlew'
                     sh './gradlew test -Dspring.profiles.active=deploy-test'
                 }
             }

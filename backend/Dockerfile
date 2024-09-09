@@ -9,4 +9,4 @@ ARG JASYPT_KEY
 COPY ${JAR_FILE} app.jar
 
 # 시스템 진입점
-ENTRYPOINT ["java", "-Djasypt.encryptor.password=${JASYPT_KEY}", "-jar", "app.jar", "--spring.profiles.active=prod"]
+ENTRYPOINT ["sh", "-c", "java -Djasypt.encryptor.password=${JASYPT_KEY} -jar app.jar --spring.profiles.active=prod"]

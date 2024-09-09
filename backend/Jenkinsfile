@@ -32,7 +32,7 @@ pipeline{
                 dir('backend/'){
                     sh 'ls'
                     sh 'chmod +x ./gradlew'
-                    sh './gradlew clean build -Dspring.profiles.active=prod -Djasypt.encryptor.password=${JASYPT_KEY} -x test'
+                    sh './gradlew clean build -Djasypt.encryptor.password=${JASYPT_KEY} -x test'
                 }
             }
         }
@@ -53,7 +53,7 @@ pipeline{
                     sh "docker rm ${CONTAINER_NAME} || true"
 
                     // 새로운 Docker 컨테이너 실행
-                    sh "docker run --name ${CONTAINER_NAME} -d --network connect-default ${IMAGE_NAME}:${env.BUILD_NUMBER}"
+                    sh "docker run --name ${CONTAINER_NAME} -d ${IMAGE_NAME}:${env.BUILD_NUMBER}"
 
                     // 사용하지 않는 Docker 이미지를 정리
                     sh "docker image prune -a -f || true"

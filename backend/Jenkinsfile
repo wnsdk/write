@@ -22,7 +22,7 @@ pipeline{
                 echo 'Running Deployment Test...'
                 dir('backend/') {
                     sh 'chmod +x ./gradlew'
-                    sh './gradlew clean test -Dspring.profiles.active=deploy-test -Djasypt.encryptor.password=${env.JASYPT_KEY} --info'
+                    sh './gradlew clean test -Dspring.profiles.active=deploy-test -Djasypt.encryptor.password=${JASYPT_KEY} --info'
                 }
             }
         }
@@ -32,7 +32,7 @@ pipeline{
                 dir('backend/'){
                     sh 'ls'
                     sh 'chmod +x ./gradlew'
-                    sh './gradlew clean build -Dspring.profiles.active=prod -Djasypt.encryptor.password=${env.JASYPT_KEY} -x test'
+                    sh './gradlew clean build -Dspring.profiles.active=prod -Djasypt.encryptor.password=${JASYPT_KEY} -x test'
                 }
             }
         }

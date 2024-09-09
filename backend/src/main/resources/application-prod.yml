@@ -1,0 +1,6 @@
+spring:
+  datasource:
+    url: jdbc:mysql://<운영 DB 주소>:3306/production_db
+    username: 운영계정
+    password: 운영비밀번호
+    driver-class-name: com.mysql.cj.jdbc.Driver

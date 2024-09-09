@@ -1,4 +1,6 @@
 spring:
+  profiles:
+    active: local
   application:
     name: write
   security:
@@ -25,3 +27,6 @@ jwt:
 jasypt:
   encryptor:
     bean: jasyptStringEncryptor
+
+common: common
+test: common

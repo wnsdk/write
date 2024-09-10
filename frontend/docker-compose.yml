@@ -1,6 +1,6 @@
 version: "3"
 services:
-  client:
+  frontend:
     container_name: write-fe
     build:
       context: ./frontend
@@ -10,7 +10,7 @@ services:
     container_name: nginx
     build: ./.nginx
     depends_on:
-      - client
+      - frontend
     volumes:
       - .nginx/conf.d:/etc/nginx/conf.d
       - .nginx/cert:/cert

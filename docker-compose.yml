@@ -12,8 +12,8 @@ services:
         depends_on:
             - client
         volumes:
-            - .nginx/conf.d:/etc/nginx/conf.d
-            - .nginx/cert:/cert
+            - /var/jenkins_home/workspace/write-fe/.nginx/conf.d:/etc/nginx/conf.d
+            - /var/jenkins_home/workspace/write-fe/.nginx/cert:/cert
         ports:
             - 80:80
             - 443:443

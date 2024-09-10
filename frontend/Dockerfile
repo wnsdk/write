@@ -15,6 +15,6 @@ FROM nginx:alpine
 COPY nginx.conf /etc/nginx/conf.d
 
 # 위에서 생성한 앱의 빌드산출물을 nginx의 샘플 앱이 사용하던 폴더로 이동
-COPY --from=builder /usr/src/app/dist /usr/share/nginx/html
+COPY --from=builder dist /usr/share/nginx/html
 
 # CMD ["nginx", "-g", "daemon off;"]

@@ -8,12 +8,12 @@ services:
             - 5173:5173
     nginx:
         container_name: nginx
-        build: ./frontend/.nginx
+        build: ./.nginx
         depends_on:
             - client
         volumes:
-            - ./frontend/.nginx/conf.d:/etc/nginx/conf.d
-            - ./frontend/.nginx/cert:/cert
+            - ./.nginx/conf.d:/etc/nginx/conf.d
+            - ./.nginx/cert:/cert
 
         ports:
             - 80:80

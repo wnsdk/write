@@ -5,7 +5,7 @@ services:
     build:
       context: ./frontend
     ports:
-      - 3000:3000
+      - 5173:5173
   nginx:
     container_name: nginx
     build: ./.nginx

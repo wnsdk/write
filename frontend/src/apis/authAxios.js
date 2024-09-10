@@ -1,5 +1,5 @@
 import axios from 'axios';
-import { useLoginStore } from '../store/useLoginStore';
+import { useLoginStore } from '../store/loginStore';
 
 export const authAxios = axios.create({
     baseURL: 'http://localhost:8080/',

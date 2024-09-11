@@ -27,36 +27,24 @@ pipeline{
             }
         }
 
-        stage('Gradle Build'){
-            steps{
-                dir('be/'){
-                    sh 'chmod +x ./gradlew'
-                    sh './gradlew clean build -x test'
-                }
-            }
-        }
-
-        stage('Build Docker Image'){
+	stage('Deploy Docker'){
             steps{
                 script{
-                    sh "docker build -t ${IMAGE_NAME}:${env.BUILD_NUMBER} --build-arg JASYPT_ENCRYPTOR_PASSWORD=${JASYPT_KEY} backend/"
+                    sh "docker-compose -f docker-compose.yml pull"
+                    sh "COMPOSE_DOCKER_CLI_BUILD=1 DOCKER_BUILDKIT=1"
+                    sh "docker-compose -f docker-compose.yml build --build-arg JASYPT_ENCRYPTOR_PASSWORD=${JASYPT_KEY} --no-cache"
+                    sh "docker-compose -f docker-compose.yml up --build be -d --remove-orphans"
                 }
             }
         }
 
-        stage('Deploy Docker'){
+        stage('Finish'){
             steps{
-                script {
-                    // 기존 컨테이너가 있으면 중지하고 삭제
-                    sh "docker rm -f ${CONTAINER_NAME} || true"
-
-                    // 새로운 Docker 컨테이너 실행
-                    sh "docker run --name ${CONTAINER_NAME} -d --network db ${IMAGE_NAME}:${env.BUILD_NUMBER} -e JASYPT_ENCRYPTOR_PASSWORD=${JASYPT_KEY} -e JAVA_OPTS='-Djasypt.encryptor.password=${JASYPT_KEY}'"
-                    
-                    // 사용하지 않는 Docker 이미지를 정리
-                    sh "docker image prune -a -f || true"
+                script{
+                    sh "docker rmi -f \$(docker images -f \"dangling=true\" -q) || true"
                 }
             }
+        }
 
             post {
                 success {

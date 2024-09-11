@@ -1,0 +1,32 @@
+version: '3'
+services:
+    fe:
+        build:
+            context: ./fe
+        ports:
+            - 5173:5173
+    be:
+        image: ${IMAGE_NAME}:${BUILD_NUMBER}
+        build:
+            context: ./be
+            args:
+                JASYPT_ENCRYPTOR_PASSWORD: ${JASYPT_KEY}
+        environment:
+            - JASYPT_ENCRYPTOR_PASSWORD=${JASYPT_KEY}
+            - JAVA_OPTS=-Djasypt.encryptor.password=${JASYPT_KEY}
+        networks:
+            - db
+        ports:
+            - 8080:8080
+        
+    nginx:
+        container_name: nginx
+        build: ./.nginx
+        depends_on:
+            - fe
+        volumes:
+            - /var/jenkinsDir/workspace/fe/.nginx/conf.d:/etc/nginx/conf.d
+            - /var/jenkinsDir/workspace/fe/.nginx/cert:/cert
+        ports:
+            - 80:80
+            - 443:443

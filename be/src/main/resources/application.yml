@@ -27,6 +27,3 @@ jwt:
 jasypt:
   encryptor:
     bean: jasyptStringEncryptor
-
-common: common
-test: common

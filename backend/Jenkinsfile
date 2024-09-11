@@ -2,8 +2,8 @@ pipeline{
     agent any
 
     environment {
-        IMAGE_NAME = "write-be"
-        CONTAINER_NAME = "write-be"
+        IMAGE_NAME = "be"
+        CONTAINER_NAME = "be"
         JASYPT_KEY = credentials('jasypt-key')
     }
 
@@ -12,7 +12,7 @@ pipeline{
             steps{
                 git url: 'https://github.com/wnsdk/write.git',
                     credentialsId: 'github-credential', // Jenkins에서 설정한 credential의 ID
-                    branch: 'main-be'
+                    branch: 'be/main'
             }
         }
 

@@ -1,4 +1,4 @@
 # write ✏️
 
 영어 작문 연습 어플
-![로고](./doc/logo/icon_circle.png)
+<img src="./doc/logo/icon_circle.png" alt="로고" style="width: 200px; height: auto;">

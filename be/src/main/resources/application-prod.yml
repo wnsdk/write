@@ -4,6 +4,8 @@ server:
     key-store-password: ENC(XZSEKgSvYhG1jlhaPsW7OQ==)
     key-store-type: PKCS12
     enabled: true
+  servlet:
+    context-path: /api
 
 logging:
   level:

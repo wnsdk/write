@@ -70,6 +70,7 @@ import { useEffect } from 'react';
 import { useNavigate, useSearchParams } from 'react-router-dom';
 import { useLoginStore } from '@/store/loginStore';
 import { authAxios } from '@/apis/authAxios';
+import styles from './Header.module.css';
 
 export default function Header() {
     const [searchParams] = useSearchParams();
@@ -106,6 +107,8 @@ export default function Header() {
         return (
             <>
                 <div>
+                    <img className={styles.logo} src="/icon_circle.png" alt="logo" />
+                    <h1>Write</h1>
                     <h2>환영합니다</h2>
                     <p>로그인 후 더 많은 내용을 확인하세요.</p>
                 </div>

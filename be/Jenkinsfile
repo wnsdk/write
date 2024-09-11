@@ -30,10 +30,10 @@ pipeline{
 	stage('Deploy Docker'){
             steps{
                 script{
-                    sh "docker-compose -f docker-compose.yml pull"
+                    sh "docker-compose -f docker-compose.yml pull be"
                     sh "COMPOSE_DOCKER_CLI_BUILD=1 DOCKER_BUILDKIT=1"
-                    sh "docker-compose -f docker-compose.yml build --build-arg JASYPT_ENCRYPTOR_PASSWORD=${JASYPT_KEY} --no-cache"
-                    sh "docker-compose -f docker-compose.yml up --build be -d --remove-orphans"
+                    sh "docker-compose -f docker-compose.yml build be --build-arg JASYPT_ENCRYPTOR_PASSWORD=${JASYPT_KEY} --no-cache"
+                    sh "docker-compose -f docker-compose.yml up be -d --remove-orphans"
                 }
             }
         }

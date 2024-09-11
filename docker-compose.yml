@@ -1,19 +1,19 @@
 version: '3'
 services:
     client:
-        container_name: client
+        container_name: fe
         build:
-            context: ./frontend
+            context: ./fe
         ports:
             - 5173:5173
     nginx:
         container_name: nginx
         build: ./.nginx
         depends_on:
-            - client
+            - fe
         volumes:
-            - /var/jenkinsDir/workspace/write-fe/.nginx/conf.d:/etc/nginx/conf.d
-            - /var/jenkinsDir/workspace/write-fe/.nginx/cert:/cert
+            - /var/jenkinsDir/workspace/fe/.nginx/conf.d:/etc/nginx/conf.d
+            - /var/jenkinsDir/workspace/fe/.nginx/cert:/cert
         ports:
             - 80:80
             - 443:443

@@ -1,12 +1,14 @@
-import { useParams } from 'react-router-dom';
+import { useLocation } from 'react-router-dom';
 
 export default function ListPage() {
-    const { mode } = useParams();
+    const location = useLocation();
+    const { state } = location;
+    const mode = state?.mode;
 
     return (
         <>
-            {mode === 'writing' && <p>작문</p>}
-            {mode === 'copying' && <p>필사</p>}주제 리스트
+            {mode === 'writing' && <span>작문</span>}
+            {mode === 'copying' && <span>필사</span>} 주제 리스트
         </>
     );
 }

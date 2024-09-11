@@ -20,7 +20,7 @@ pipeline{
         stage('Deployment Test') {
             steps {
                 echo 'Running Deployment Test...'
-                dir('backend/') {
+                dir('be/') {
                     sh 'chmod +x ./gradlew'
                     sh './gradlew clean test -Djasypt.encryptor.password=${JASYPT_KEY} --info'
                 }
@@ -29,7 +29,7 @@ pipeline{
 
         stage('Gradle Build'){
             steps{
-                dir('backend/'){
+                dir('be/'){
                     sh 'chmod +x ./gradlew'
                     sh './gradlew clean build -x test'
                 }

@@ -8,6 +8,7 @@ import WritingPage from '@/pages/WritingPage';
 import CorrectionPage from '@/pages/CorrectionPage';
 import ListPage from '@/pages/ListPage';
 import LoginPage from '@/pages/LoginPage';
+import NotFoundPage from '@/pages/NotFoundPage';
 
 function App() {
     return (
@@ -21,12 +22,12 @@ function App() {
                     <Route path="/writing" element={<WritingPage />} />
                     <Route path="/correction" element={<CorrectionPage />} />
                     <Route path="/list" element={<ListPage />} />
-                    <Route path="*" element={<MainPage />} />
                 </Route>
 
                 {/* 단독으로 보여질 페이지들은 여기에 */}
                 <Route path="/login" element={<LoginPage />} />
                 <Route path="/test" element={<TestPage />} />
+                <Route path="*" element={<NotFoundPage />} />
             </Routes>
         </>
     );

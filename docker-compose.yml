@@ -6,6 +6,8 @@ services:
             context: ./fe
         ports:
             - 5173:5173
+        networks:
+            - nginx
     nginx:
         container_name: nginx
         build: ./.nginx
@@ -17,3 +19,8 @@ services:
         ports:
             - 80:80
             - 443:443
+        networks:
+            - nginx
+networks:
+    nginx:
+        name: nginx

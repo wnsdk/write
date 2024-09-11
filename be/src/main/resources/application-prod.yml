@@ -1,4 +1,5 @@
 server:
+  port: 8443
   ssl:
     key-store: classpath:keystore.p12
     key-store-password: ENC(XZSEKgSvYhG1jlhaPsW7OQ==)
@@ -10,7 +11,7 @@ server:
 logging:
   level:
     org:
-      springframework: DEBUG
+      springframework: INFO
 
 spring:
   datasource:

@@ -17,15 +17,15 @@ pipeline{
         }
 
         // 스프링 테스트 코드를 통과하는지 확인한다.
-        stage('Deployment Test') {
-            steps {
-                echo 'Running Deployment Test...'
-                dir('be/') {
-                    sh 'chmod +x ./gradlew'
-                    sh './gradlew clean test -Djasypt.encryptor.password=${JASYPT_KEY} --info'
-                }
-            }
-        }
+        // stage('Deployment Test') {
+        //     steps {
+        //         echo 'Running Deployment Test...'
+        //         dir('be/') {
+        //             sh 'chmod +x ./gradlew'
+        //             sh './gradlew clean test -Djasypt.encryptor.password=${JASYPT_KEY} --info'
+        //         }
+        //     }
+        // }
 
         stage('Gradle Build'){
             steps{

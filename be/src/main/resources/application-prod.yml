@@ -1,6 +1,6 @@
 spring:
   datasource:
-    url: jdbc:mysql://write-db:3306/write_db
+    url: jdbc:mysql://write-db:3306/write
     username: root
     password: root
   jpa:
@@ -11,8 +11,6 @@ spring:
     properties:
       hibernate:
         format_sql: true
-        
-test: prod
 
 jasypt:
   encryptor:

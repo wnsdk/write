@@ -1,18 +1,14 @@
-jasypt:
-  encryptor:
-    password: ${JASYPT_ENCRYPTOR_PASSWORD}
+server:
+  ssl:
+    key-store: classpath:keystore.p12
+    key-store-password: ENC(XZSEKgSvYhG1jlhaPsW7OQ==)
+    key-store-type: PKCS12
+    enabled: true
 
 logging:
   level:
     org:
       springframework: DEBUG
-
-server:
-  ssl:
-    key-store: classpath:keystore.p12
-    key-store-password: ENC(oSnEdzfDZdJsKAVr7HRHkbJgKIK/XZje)
-    key-store-type: PKCS12
-    enabled: true
 
 spring:
   datasource:
@@ -27,3 +23,7 @@ spring:
     properties:
       hibernate:
         format_sql: true
+
+jasypt:
+  encryptor:
+    password: ${JASYPT_ENCRYPTOR_PASSWORD}

@@ -1,7 +1,7 @@
 import { useQuery, useMutation } from '@tanstack/react-query';
 import { customTestAxios } from '../apis/customTestAxios';
 import { useTestStore } from '../store/store';
-import { $ } from './axios';
+import { $ } from '@/apis/axios';
 
 export default function TestPage() {
     // const { isLoading, error, data, isFetching } = useQuery({

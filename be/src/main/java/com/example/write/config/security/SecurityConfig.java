@@ -107,7 +107,7 @@ public class SecurityConfig {
                 //localhost:5173 에 대한 CORS 허용
                 .cors(corsCustomizer -> corsCustomizer.configurationSource(request -> {
                     CorsConfiguration config = new CorsConfiguration();
-                    config.setAllowedOrigins(List.of("http://localhost:5173", "https://usewrite.site"));
+                    config.setAllowedOrigins(List.of("http://localhost:5173", "https://www.usewrite.site"));
                     config.setAllowedMethods(List.of("GET", "POST", "PUT", "DELETE", "PATCH", "OPTIONS"));
                     config.setAllowCredentials(true);
 //                    config.setAllowedHeaders(Collections.singletonList("*"));

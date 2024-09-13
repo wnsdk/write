@@ -7,7 +7,7 @@ export default function TestPage() {
     // const { isLoading, error, data, isFetching } = useQuery({
     //     queryKey: ['getPost'],
     //     queryFn: async () => {
-    //         const response = await customTestAxios.get('posts/1');
+    //         const response = await customTestAxios.get('/posts/1');
     //         return response.data;
     //     },
     // });
@@ -25,7 +25,7 @@ export default function TestPage() {
     // 서버로 GET 요청을 보내는 함수
     const fetchData = async () => {
         try {
-            const response = await $.get('test'); // '/api/data'는 엔드포인트 예시
+            const response = await $.get('/test');
             console.log('서버 응답 데이터:', response.data);
             return response.data;
         } catch (error) {

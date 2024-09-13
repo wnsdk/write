@@ -1,6 +1,7 @@
 import { useQuery, useMutation } from '@tanstack/react-query';
 import { customTestAxios } from '../apis/customTestAxios';
 import { useTestStore } from '../store/store';
+import { $ } from './axios';
 
 export default function TestPage() {
     // const { isLoading, error, data, isFetching } = useQuery({
@@ -21,6 +22,17 @@ export default function TestPage() {
     const plusCounter = useTestStore((state) => state.plusCounter);
     const resetCounter = useTestStore((state) => state.resetCounter);
 
+    // 서버로 GET 요청을 보내는 함수
+    const fetchData = async () => {
+        try {
+            const response = await $.get('test'); // '/api/data'는 엔드포인트 예시
+            console.log('서버 응답 데이터:', response.data);
+            return response.data;
+        } catch (error) {
+            console.error('GET 요청 에러:', error);
+        }
+    };
+
     return (
         <>
             {/* <h3>React Query - useQuery 테스트</h3>
@@ -36,6 +48,7 @@ export default function TestPage() {
             <div>counter : {counter}</div>
             <button onClick={plusCounter}>더하기</button>
             <button onClick={resetCounter}>초기화</button>
+            <button onClick={fetchData}>서버 연결 확인</button>
         </>
     );
 }

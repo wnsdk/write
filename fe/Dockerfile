@@ -8,7 +8,7 @@ RUN npm install --force
 
 # 소스를 작업폴더로 복사하고 빌드
 COPY . /app
-RUN npm run build
+RUN npm run build -- --mode production
 
 FROM nginx:alpine
 # nginx의 기본 설정을 삭제하고 앱에서 설정한 파일을 복사

@@ -51,7 +51,7 @@ pipeline{
                     sh "docker rm -f ${CONTAINER_NAME} || true"
 
                     // 새로운 Docker 컨테이너 실행 
-                    sh "docker run -d --name ${CONTAINER_NAME} -p 8080:8443 --network db --network nginx ${IMAGE_NAME}:${env.BUILD_NUMBER} -e JASYPT_ENCRYPTOR_PASSWORD=${JASYPT_KEY} -e JAVA_OPTS='-Djasypt.encryptor.password=${JASYPT_KEY}'"
+                    sh "docker run --name ${CONTAINER_NAME} -p 8080:8443 -d --network db --network nginx ${IMAGE_NAME}:${env.BUILD_NUMBER} -e JASYPT_ENCRYPTOR_PASSWORD=${JASYPT_KEY} -e JAVA_OPTS='-Djasypt.encryptor.password=${JASYPT_KEY}'"
                     
                     // 사용하지 않는 Docker 이미지를 정리
                     sh "docker image prune -a -f || true"

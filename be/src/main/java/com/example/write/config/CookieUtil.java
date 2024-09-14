@@ -14,8 +14,12 @@ import java.util.Optional;
 @Component
 public class CookieUtil {
 
-    @Autowired
     private static Environment env;
+
+    @Autowired
+    public CookieUtil(Environment environment) {
+        CookieUtil.env = environment;  // static 필드에 Environment 주입
+    }
 
     public static Optional<Cookie> getCookie(HttpServletRequest request, String name) {
         Cookie[] cookies = request.getCookies();
@@ -37,7 +41,8 @@ public class CookieUtil {
         cookie.setMaxAge(maxAge);
 
 //        String activeProfile = System.getProperty("spring.profiles.active"); // 현재 프로파일 확인
-        String activeProfile = env.getActiveProfiles()[0]; // 현재 프로파일 확인
+        String[] activeProfiles = env.getActiveProfiles();
+        String activeProfile = activeProfiles.length > 0 ? activeProfiles[0] : "default";
         System.out.println("~~~~~~~~~" + activeProfile);
         if ("prod".equals(activeProfile)) {
             // 운영환경에서만 적용될 코드

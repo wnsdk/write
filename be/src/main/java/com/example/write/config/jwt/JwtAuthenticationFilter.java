@@ -35,12 +35,12 @@ public class JwtAuthenticationFilter extends OncePerRequestFilter {
     private static final List<String> EXCLUDE_URL =
             List.of(
 //                    "/oauth2/authorization/google",
-                    "/login/oauth2/code/google", "/api/login/*"
+                    "/login/oauth2/code/google", "/api/login/oauth2/code/google"
             );
 
     @Override
     protected boolean shouldNotFilter(HttpServletRequest request) throws ServletException {
-        return EXCLUDE_URL.stream().anyMatch(exclude -> exclude.equalsIgnoreCase(request.getServletPath()));
+        return EXCLUDE_URL.stream().anyMatch(exclude -> request.getServletPath().startsWith(exclude));
     }
 
     /**

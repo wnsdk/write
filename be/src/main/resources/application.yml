@@ -10,7 +10,6 @@ spring:
           google:
             client-id: 390802417429-m7b1l1r596g1etcouplagt45ep4p09dj.apps.googleusercontent.com
             client-secret: ENC(arGwXVbaE7Y6RfXnMAtDa6vV33q9OYCODkumAtNXEKC0K3YZz4796RwGxH55g84l)
-            redirect-uri: https://www.usewrite.site/api/login/oauth2/code/google
             scope:
               - profile
               - email

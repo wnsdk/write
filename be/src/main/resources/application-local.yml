@@ -19,4 +19,4 @@ spring:
     database-platform: org.hibernate.dialect.H2Dialect
 
 redirect:
-  uri: /login/oauth2/code/*
+  uri: /login/oauth2/code/google

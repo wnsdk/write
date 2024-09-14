@@ -60,7 +60,8 @@ public class SecurityConfig {
                                 .authorizationEndpoint(authorizationEndpointConfig ->
                                         authorizationEndpointConfig
                                                 //Client 가 이 URI 로 요청을 보내면 OAuth 공급자에게 리디렉션 됨
-                                                .baseUri("/oauth2/authorization")
+//                                                .baseUri("/oauth2/authorization")
+                                                .baseUri("/api/oauth2/authorization")
                                                 //OAuth2 승인 요청이 자동으로 cookie 에 저장됨
                                                 .authorizationRequestRepository(oAuth2AuthorizationRequestBasedOnCookieRepository))
 

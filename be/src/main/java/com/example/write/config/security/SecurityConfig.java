@@ -68,7 +68,7 @@ public class SecurityConfig {
                                 //OAuth 공급자에게 인증을 받은 후 리다이렉트되는 엔드포인트 구성
                                 .redirectionEndpoint(redirectionEndpointConfig ->
                                         redirectionEndpointConfig
-                                                .baseUri("/api/login/oauth2/code/google"))
+                                                .baseUri("/login/oauth2/code/google"))
 
                                 //인증 후 사용자 정보를 처리하는 서비스 설정
                                 .userInfoEndpoint(userInfoEndpoint ->

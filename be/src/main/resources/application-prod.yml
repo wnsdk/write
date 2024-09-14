@@ -41,3 +41,6 @@ spring:
 jasypt:
   encryptor:
     password: ${JASYPT_ENCRYPTOR_PASSWORD}
+
+redirect:
+  uri: /api/login/oauth2/code/*

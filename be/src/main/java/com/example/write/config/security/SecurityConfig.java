@@ -5,6 +5,7 @@ import com.example.write.config.jwt.JwtProvider;
 import com.example.write.config.oauth.OAuth2SuccessHandler;
 import jakarta.servlet.http.HttpSession;
 import lombok.RequiredArgsConstructor;
+import org.springframework.beans.factory.annotation.Value;
 import org.springframework.context.annotation.Bean;
 import org.springframework.context.annotation.Configuration;
 import org.springframework.data.redis.core.RedisTemplate;
@@ -36,6 +37,8 @@ public class SecurityConfig {
     private final AuthenticationEntryPoint authenticationEntryPoint;
     private final RedisTemplate<String, String> redisTemplate;
     private final JwtProvider jwtProvider;
+    @Value("${redirect.uri}")
+    private String redirectUri;
 
     @Bean
     public SecurityFilterChain securityFilterChain(HttpSecurity http) throws Exception {
@@ -66,7 +69,7 @@ public class SecurityConfig {
                                 //OAuth 공급자에게 인증을 받은 후 리다이렉트되는 엔드포인트 구성
                                 .redirectionEndpoint(redirectionEndpointConfig ->
                                         redirectionEndpointConfig
-                                                .baseUri("/*/oauth2/code/*"))
+                                                .baseUri(redirectUri))
 
                                 //인증 후 사용자 정보를 처리하는 서비스 설정
                                 .userInfoEndpoint(userInfoEndpoint ->

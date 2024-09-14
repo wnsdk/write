@@ -17,3 +17,6 @@ spring:
       ddl-auto: create # create, create-drop, update, validate
     show-sql: true
     database-platform: org.hibernate.dialect.H2Dialect
+
+redirect:
+  uri: /login/oauth2/code/*

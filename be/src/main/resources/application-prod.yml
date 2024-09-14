@@ -43,4 +43,4 @@ jasypt:
     password: ${JASYPT_ENCRYPTOR_PASSWORD}
 
 redirect:
-  uri: /api/login/oauth2/code/google
+  uri: /login/oauth2/code/google

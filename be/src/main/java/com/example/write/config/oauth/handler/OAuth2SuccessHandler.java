@@ -1,8 +1,10 @@
-package com.example.write.config.oauth;
+package com.example.write.config.oauth.handler;
 
 import com.example.write.config.CookieUtil;
 import com.example.write.config.jwt.JwtProvider;
 import com.example.write.config.jwt.TokenInfo;
+import com.example.write.config.oauth.OAuth2AuthorizationRequestBasedOnCookieRepository;
+import com.example.write.config.oauth.OAuth2UserInfo;
 import com.example.write.domain.entity.User;
 import com.example.write.repository.UserRepository;
 import jakarta.servlet.ServletException;

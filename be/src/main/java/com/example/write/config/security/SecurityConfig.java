@@ -2,10 +2,10 @@ package com.example.write.config.security;
 
 import com.example.write.config.jwt.JwtAuthenticationFilter;
 import com.example.write.config.jwt.JwtProvider;
-import com.example.write.config.oauth.OAuth2SuccessHandler;
+import com.example.write.config.oauth.handler.OAuth2FailureHandler;
+import com.example.write.config.oauth.handler.OAuth2SuccessHandler;
 import jakarta.servlet.http.HttpSession;
 import lombok.RequiredArgsConstructor;
-import org.springframework.beans.factory.annotation.Value;
 import org.springframework.context.annotation.Bean;
 import org.springframework.context.annotation.Configuration;
 import org.springframework.data.redis.core.RedisTemplate;
@@ -13,7 +13,6 @@ import org.springframework.security.config.annotation.web.builders.HttpSecurity;
 import org.springframework.security.config.annotation.web.configuration.EnableWebSecurity;
 import org.springframework.security.config.annotation.web.configurers.AbstractHttpConfigurer;
 
-import org.springframework.security.config.annotation.web.configurers.LogoutConfigurer;
 import org.springframework.security.oauth2.client.userinfo.OAuth2UserService;
 import org.springframework.security.oauth2.client.web.AuthorizationRequestRepository;
 import org.springframework.security.oauth2.core.endpoint.OAuth2AuthorizationRequest;
@@ -22,7 +21,6 @@ import org.springframework.security.web.SecurityFilterChain;
 import org.springframework.security.web.authentication.UsernamePasswordAuthenticationFilter;
 import org.springframework.web.cors.CorsConfiguration;
 
-import java.util.Collections;
 import java.util.List;
 
 @Configuration
@@ -31,6 +29,7 @@ import java.util.List;
 public class SecurityConfig {
     private final OAuth2UserService oAuth2UserService;
     private final OAuth2SuccessHandler oAuth2SuccessHandler;
+    private final OAuth2FailureHandler oAuth2FailureHandler;
     private final AuthorizationRequestRepository<OAuth2AuthorizationRequest> oAuth2AuthorizationRequestBasedOnCookieRepository;
     //    private final JwtTokenProvider jwtTokenProvider;
     private final JwtAuthenticationFilter jwtAuthenticationFilter;
@@ -76,6 +75,7 @@ public class SecurityConfig {
 
                                 // 로그인 성공 시 핸들러
                                 .successHandler(oAuth2SuccessHandler)
+                                .failureHandler(oAuth2FailureHandler)
                 );
 
         // 인증 실패할 경우

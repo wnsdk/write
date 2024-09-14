@@ -7,7 +7,9 @@ export default function LoginPage() {
 
     // 소셜 로그인
     function socialLogin(thirdPartyId) {
-        window.location.href = `http://localhost:8080/oauth2/authorization/${thirdPartyId}?redirect_uri=http://localhost:5173/oauth/redirect`;
+        window.location.href = `${
+            import.meta.env.VITE_API_BASE_URL
+        }/oauth2/authorization/${thirdPartyId}?redirect_uri=${import.meta.env.VITE_BASE_URL}/oauth/redirect`;
     }
 
     return (

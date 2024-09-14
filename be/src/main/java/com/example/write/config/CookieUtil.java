@@ -4,19 +4,18 @@ import jakarta.servlet.http.Cookie;
 import jakarta.servlet.http.HttpServletRequest;
 import jakarta.servlet.http.HttpServletResponse;
 import org.springframework.beans.factory.annotation.Autowired;
-import org.springframework.beans.factory.annotation.Value;
 import org.springframework.core.env.Environment;
+import org.springframework.stereotype.Component;
 import org.springframework.util.SerializationUtils;
 
 import java.util.Base64;
 import java.util.Optional;
 
+@Component
 public class CookieUtil {
 
-//    @Autowired
-//    private static Environment env;
-    @Value("${spring.profiles.active}")
-    private static String activeProfile;
+    @Autowired
+    private static Environment env;
 
     public static Optional<Cookie> getCookie(HttpServletRequest request, String name) {
         Cookie[] cookies = request.getCookies();
@@ -38,7 +37,7 @@ public class CookieUtil {
         cookie.setMaxAge(maxAge);
 
 //        String activeProfile = System.getProperty("spring.profiles.active"); // 현재 프로파일 확인
-//        String activeProfile = env.getActiveProfiles()[0]; // 현재 프로파일 확인
+        String activeProfile = env.getActiveProfiles()[0]; // 현재 프로파일 확인
         System.out.println("~~~~~~~~~" + activeProfile);
         if ("prod".equals(activeProfile)) {
             // 운영환경에서만 적용될 코드

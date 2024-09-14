@@ -1,0 +1,4 @@
+/.nginx
+/fe
+/doc
+docker-compose.yml

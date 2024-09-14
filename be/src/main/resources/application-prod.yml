@@ -41,6 +41,3 @@ spring:
 jasypt:
   encryptor:
     password: ${JASYPT_ENCRYPTOR_PASSWORD}
-
-redirect:
-  uri: https://www.usewrite.site/api/login/oauth2/code/google

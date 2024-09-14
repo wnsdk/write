@@ -43,7 +43,6 @@ public class OAuth2SuccessHandler extends SimpleUrlAuthenticationSuccessHandler 
             throws IOException, ServletException {
 
         String targetUrl = determineTargetUrl(request, response, authentication);
-        System.out.println("targetUrl" + targetUrl);
 
         // 서버가 이미 클라이언트에게 응답을 생성해 보내기 시작했다면??
         if (response.isCommitted()) {

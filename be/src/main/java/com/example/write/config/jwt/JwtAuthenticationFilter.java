@@ -34,8 +34,7 @@ public class JwtAuthenticationFilter extends OncePerRequestFilter {
     // 인증에서 제외할 url
     private static final List<String> EXCLUDE_URL =
             List.of(
-//                    "/oauth2/authorization/google",
-                    "/login/oauth2/code/google", "/api/login/oauth2/code/google", "/api/oauth2/authorization/google"
+                    "/login/oauth2/code/google", "/api/login/oauth2/code/google"
             );
 
     @Override

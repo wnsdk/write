@@ -40,10 +40,8 @@ public class CookieUtil {
         cookie.setHttpOnly(true);
         cookie.setMaxAge(maxAge);
 
-//        String activeProfile = System.getProperty("spring.profiles.active"); // 현재 프로파일 확인
         String[] activeProfiles = env.getActiveProfiles();
         String activeProfile = activeProfiles.length > 0 ? activeProfiles[0] : "default";
-        System.out.println("~~~~~~~~~" + activeProfile);
         if ("prod".equals(activeProfile)) {
             // 운영환경에서만 적용될 코드
             cookie.setDomain("usewrite.site");

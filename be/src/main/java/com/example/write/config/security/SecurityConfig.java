@@ -42,7 +42,7 @@ public class SecurityConfig {
 
     @Bean
     public SecurityFilterChain securityFilterChain(HttpSecurity http) throws Exception {
-
+        System.out.println("redirectUri : " + redirectUri);
         http
                 .authorizeHttpRequests((authorize) -> authorize
                         .requestMatchers("/test/**").permitAll()

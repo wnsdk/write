@@ -29,6 +29,10 @@ public class CookieUtil {
         cookie.setHttpOnly(true);
         cookie.setMaxAge(maxAge);
 
+        // 추가
+        cookie.setDomain("usewrite.site");
+        cookie.setSecure(true);
+
         response.addCookie(cookie);
     }
 

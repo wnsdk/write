@@ -44,10 +44,11 @@ spring:
         registration:
           google:
             redirect-uri: https://www.usewrite.site/api/login/oauth2/code/google
-    data:
-      redis:
-        host: redis
-        port: 6379
+  data:
+    redis:
+      host: redis
+      port: 6379
+
 jasypt:
   encryptor:
     password: ${JASYPT_ENCRYPTOR_PASSWORD}

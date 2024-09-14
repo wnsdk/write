@@ -29,9 +29,12 @@ public class CookieUtil {
         cookie.setHttpOnly(true);
         cookie.setMaxAge(maxAge);
 
-        // 추가
-        cookie.setDomain("usewrite.site");
-        cookie.setSecure(true);
+        String activeProfile = System.getProperty("spring.profiles.active"); // 현재 프로파일 확인
+        if ("prod".equals(activeProfile)) {
+            // 운영환경에서만 적용될 코드
+            cookie.setDomain("usewrite.site");
+            cookie.setSecure(true);
+        }
 
         response.addCookie(cookie);
     }

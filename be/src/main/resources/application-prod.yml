@@ -7,11 +7,12 @@ server:
     enabled: true
   servlet:
     context-path: /api
+  use-forward-headers: true
 
 logging:
   level:
     org:
-      springframework: INFO
+      springframework: DEBUG
 
 spring:
 #  datasource:

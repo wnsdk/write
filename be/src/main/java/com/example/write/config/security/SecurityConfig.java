@@ -43,7 +43,7 @@ public class SecurityConfig {
 
         http
                 .authorizeHttpRequests((authorize) -> authorize
-                        .requestMatchers("/test/**", "/login/**").permitAll()
+                        .requestMatchers("/test/**", "/login/**", "/api/login/**").permitAll()
 //                        .requestMatchers("/test/guest", "/test/login/**", "/oauth2/authorization/**").permitAll()
 //                        .requestMatchers("/test/admin").hasAuthority("ADMIN")
                         .anyRequest().authenticated() // JwtFilter 에서 authenticate 해줌

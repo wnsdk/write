@@ -1,0 +1,26 @@
+spring:
+  profiles:
+    active: local
+  application:
+    name: write
+  security:
+    oauth2:
+      client:
+        registration:
+          google:
+            client-id: 390802417429-m7b1l1r596g1etcouplagt45ep4p09dj.apps.googleusercontent.com
+            client-secret: ENC(arGwXVbaE7Y6RfXnMAtDa6vV33q9OYCODkumAtNXEKC0K3YZz4796RwGxH55g84l)
+            scope:
+              - profile
+              - email
+
+
+jwt:
+  # $openssl rand -hex 64
+  secret: ENC(hx4BlQzG2/B8QUoZB2VDCujxEo7n0EaR66qCLmlk8e0OBLbsXCtArHKfLAp28JgKMg15YfVG5HhtdUpPvUwEZVT8Joh8Y9nYTwnd9tJyhJA=)
+  access-token-expire-time: 20000     # 1000 == 1 second
+  refresh-token-expire-time: 50000
+
+jasypt:
+  encryptor:
+    bean: jasyptStringEncryptor

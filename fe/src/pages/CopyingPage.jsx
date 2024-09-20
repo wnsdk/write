@@ -1,3 +1,7 @@
+import { useParams } from 'react-router-dom';
+
 export default function CopyingPage() {
-    return <>필사 Page</>;
+    const { id } = useParams();
+
+    return <>필사 {id}번</>;
 }

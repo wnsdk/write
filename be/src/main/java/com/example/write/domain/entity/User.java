@@ -1,5 +1,6 @@
 package com.example.write.domain.entity;
 
+import com.example.write.domain.BaseTimeEntity;
 import com.example.write.domain.enums.Provider;
 import com.example.write.domain.enums.Role;
 import com.example.write.domain.enums.Status;
@@ -12,8 +13,8 @@ import lombok.*;
 @AllArgsConstructor(access = AccessLevel.PROTECTED)
 @Builder
 @Entity
-@Table(name = "User")
-public class User {
+@Table(name = "user")
+public class User extends BaseTimeEntity {
     @Id
     @GeneratedValue(strategy = GenerationType.IDENTITY)
     @Column(name = "user_id", nullable = false)
@@ -40,7 +41,7 @@ public class User {
     @Enumerated(EnumType.STRING)
     private Provider provider;
 
-    public void setStatus(Status status) {
+    public void updateStatus(Status status) {
         this.status = status;
     }
 

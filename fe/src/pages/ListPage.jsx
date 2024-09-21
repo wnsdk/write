@@ -1,5 +1,6 @@
 import { useLocation, useNavigate } from 'react-router-dom';
 import { useEffect, useState } from 'react';
+import styles from './ListPage.module.scss';
 
 export default function ListPage() {
     const location = useLocation();
@@ -104,7 +105,7 @@ export default function ListPage() {
     };
 
     return (
-        <>
+        <div className={styles.container}>
             {mode === 'writing' && <span>작문</span>}
             {mode === 'copying' && <span>필사</span>}
             {mode === 'translating' && <span>번역</span>}
@@ -150,6 +151,6 @@ export default function ListPage() {
                     </button>
                 </div>
             </div>
-        </>
+        </div>
     );
 }

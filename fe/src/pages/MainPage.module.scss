@@ -1,85 +1,84 @@
-@import '@/constants/variables.scss';
-@import '@/styles/_mixins.scss';
+@import "@/constants/variables.scss";
+@import "@/styles/_mixins.scss";
 
 .container {
-    @include container-style;
+  @include container-style;
 
-    .gradient_box {
-        position: absolute;
-        left: 0;
-        width: 100%;
-        height: 330px;
-        background: $gradient;
-        color: white;
+  .gradient_box {
+    position: absolute;
+    left: 0;
+    width: $container-width;
+    height: 330px;
+    background: $gradient;
+    color: white;
 
-        display: flex;
-        flex-direction: row;
-        padding: 0 $horizontal-margin;
+    display: flex;
+    flex-direction: row;
 
-        .main_title {
-            font-size: 1.5rem;
-            height: 300px;
-            margin-top: 20px;
-            margin-right: 40px;
-        }
-
-        .main_box:hover {
-            background-color: rgba($color: #000000, $alpha: 0.2);
-        }
-
-        .main_box {
-            display: flex;
-            flex-direction: column;
-            align-items: start;
-            margin-top: 27px;
-
-            border: 1px solid #fff;
-            border-radius: 10px;
-            width: 250px;
-            height: 250px;
-            padding: 10px 25px;
-
-            cursor: pointer;
-            transition: background-color 0.5s ease; /* 배경색 변경 시 서서히 변화 */
-
-            .title_box {
-                display: flex;
-                flex-direction: column;
-                align-items: flex-start;
-                height: 80px;
-
-                div:first-child {
-                    font-weight: bold;
-                    font-size: 1.25rem;
-                }
-                div:last-child {
-                }
-            }
-
-            hr {
-                width: 100%;
-                border: none;
-                height: 1px;
-                box-shadow: 0 1px 0 rgba($color: #fff, $alpha: 0.8);
-            }
-
-            .meta_data_box {
-                display: flex;
-                flex-direction: column;
-                align-items: flex-start;
-                gap: 10px;
-
-                .meta_data {
-                    display: flex;
-                    text-align: left;
-                    div:first-child {
-                        width: 80px;
-                        font-weight: bold;
-                    }
-                    div:last-child {
-                    }
-                }
-            }
-        }
+    .main_title {
+      font-size: 1.5rem;
+      height: 300px;
+      margin-top: 20px;
+      margin-right: 40px;
     }
+
+    .main_box:hover {
+      background-color: rgba($color: #000000, $alpha: 0.2);
+    }
+
+    .main_box {
+      display: flex;
+      flex-direction: column;
+      align-items: start;
+      margin-top: 27px;
+
+      border: 1px solid #fff;
+      border-radius: 10px;
+      width: 250px;
+      height: 250px;
+      padding: 10px 25px;
+
+      cursor: pointer;
+      transition: background-color 0.5s ease; /* 배경색 변경 시 서서히 변화 */
+
+      .title_box {
+        display: flex;
+        flex-direction: column;
+        align-items: flex-start;
+        height: 80px;
+
+        div:first-child {
+          font-weight: bold;
+          font-size: 1.25rem;
+        }
+        div:last-child {
+        }
+      }
+
+      hr {
+        width: 100%;
+        border: none;
+        height: 1px;
+        box-shadow: 0 1px 0 rgba($color: #fff, $alpha: 0.8);
+      }
+
+      .meta_data_box {
+        display: flex;
+        flex-direction: column;
+        align-items: flex-start;
+        gap: 10px;
+
+        .meta_data {
+          display: flex;
+          text-align: left;
+          div:first-child {
+            width: 80px;
+            font-weight: bold;
+          }
+          div:last-child {
+          }
+        }
+      }
+    }
+  }
 }

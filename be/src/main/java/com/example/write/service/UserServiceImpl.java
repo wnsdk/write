@@ -61,7 +61,7 @@ public class UserServiceImpl implements UserService {
     @Override
     public User deleteUser(String email) {
         User user = userRepository.findByEmail(email).orElseThrow(() -> new BaseException(ErrorMessage.NOT_EXIST_USER));
-        user.setStatus(Status.DELETED);
+        user.updateStatus(Status.DELETED);
         return user;
     }
 

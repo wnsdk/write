@@ -14,15 +14,15 @@ export default function ListPage() {
   const [page, setPage] = useState(1); // 현재 페이지를 저장할 상태
   const [totalPages, setTotalPages] = useState(1); // 전체 페이지 수를 저장할 상태
 
-  const fetchPrompts = async (page) => {
+  const fetchPrompts = async (page, mode) => {
     const response = await $.get(`/prompt/${mode}?page=${page - 1}&size=4`);
     setTotalPages(response.data.size - 1);
     return response.data;
   };
 
   const { data, error, isLoading } = useQuery({
-    queryKey: ["prompts", page],
-    queryFn: () => fetchPrompts(page),
+    queryKey: ["prompts", page, mode],
+    queryFn: () => fetchPrompts(page, mode),
     keepPreviousData: true, // 이전 데이터 유지
   });
 

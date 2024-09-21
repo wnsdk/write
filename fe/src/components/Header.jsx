@@ -1,69 +1,3 @@
-// import { Outlet } from 'react-router-dom';
-// import { Buffer } from 'buffer';
-// import { useEffect } from 'react';
-// import { useNavigate, useSearchParams } from 'react-router-dom';
-// import { useLoginStore } from '@/store/loginStore';
-// import { authAxios } from '@/apis/authAxios';
-
-// export default function Header() {
-//     const [searchParams] = useSearchParams();
-//     const navigate = useNavigate();
-
-//     const { email, name, profile, role, accessToken, setAccessToken, setLogout } = useLoginStore();
-
-//     const logout = () => {
-//         authAxios.post(`/logout`).then(() => {
-//             setLogout(); // store에 저장된 로그인 정보 없애기
-//             navigate('/');
-//         });
-//     };
-
-//     useEffect(() => {
-//         const base64Payload = searchParams.get('accessToken').split('.')[1];
-//         const payload = Buffer.from(base64Payload, 'base64');
-//         const result = JSON.parse(payload.toString());
-
-//         useLoginStore.setState({
-//             email: result.email,
-//             name: result.name,
-//             profile: result.profile,
-//             role: result.auth,
-//             accessToken: searchParams.get('accessToken'),
-//         });
-//     }, []);
-
-//     return (
-//         <>
-//             {' '}
-//             <div>
-//                 <h2>환영합니다</h2>
-//                 <img src={profile} />
-//                 <h3>{name} 님</h3>
-
-//                 <table>
-//                     <tbody>
-//                         <tr>
-//                             <th>이메일</th>
-//                             <td>{email}</td>
-//                         </tr>
-//                         <tr>
-//                             <th>권한</th>
-//                             <td>{role}</td>
-//                         </tr>
-
-//                         <tr>
-//                             <th>access token</th>
-//                             <td>{accessToken}</td>
-//                         </tr>
-//                     </tbody>
-//                 </table>
-
-//                 <button onClick={() => logout()}>로그아웃</button>
-//             </div>
-//             <Outlet />
-//         </>
-//     );
-// }
 import { Outlet } from 'react-router-dom';
 import { Buffer } from 'buffer';
 import { useEffect } from 'react';
@@ -103,36 +37,35 @@ export default function Header() {
     }, [searchParams]);
 
     // 로그인 상태에 따라 조건부 렌더링
-    if (!accessToken) {
-        return (
-            <>
-                <div className={styles.header}>
-                    {/* <img className={styles.logo} src="/icon_circle.png" alt="logo" /> */}
-                    <span className={styles.title} onClick={() => navigate('/')}>
-                        write
-                    </span>
-                    <nav className={styles.nav}>
-                        <span onClick={() => navigate('/ServiceIntroduction')}>서비스 소개</span>
-                        <span onClick={() => navigate('/list', { state: { mode: 'writing' } })}>작문</span>
-                        <span onClick={() => navigate('/list', { state: { mode: 'copying' } })}>필사</span>
-                        <span onClick={() => navigate('/list', { state: { mode: 'translating' } })}>번역</span>
-                    </nav>
-                    <button className={styles.login} onClick={() => navigate('/login')}>
-                        로그인
-                    </button>
-                </div>
-                <Outlet />
-            </>
-        );
-    }
-
     return (
         <>
             <div className={styles.header}>
-                <h2>환영합니다</h2>
-                <img src={profile} alt="프로필 이미지" />
-                <h3>{name}님</h3>
-                <button onClick={() => logout()}>로그아웃</button>
+                {/* <img className={styles.logo} src="/icon_circle.png" alt="logo" /> */}
+                <span className={styles.title} onClick={() => navigate('/')}>
+                    write
+                </span>
+                <nav className={styles.nav}>
+                    <span onClick={() => navigate('/ServiceIntroduction')}>서비스 소개</span>
+                    <span onClick={() => navigate('/list', { state: { mode: 'writing' } })}>작문</span>
+                    <span onClick={() => navigate('/list', { state: { mode: 'copying' } })}>필사</span>
+                    <span onClick={() => navigate('/list', { state: { mode: 'translating' } })}>번역</span>
+                </nav>
+                {!accessToken && (
+                    <button className={styles.login} onClick={() => navigate('/login')}>
+                        로그인
+                    </button>
+                )}
+                {accessToken && (
+                    <div className={styles.login}>
+                        <div className={styles.hover_box}>
+                            <img className={styles.profile} src={profile} alt="프로필 이미지" />
+                            <div className={styles.tooltip}>
+                                <div>마이페이지</div>
+                                <div onClick={() => logout()}>로그아웃</div>
+                            </div>
+                        </div>
+                    </div>
+                )}
             </div>
             <Outlet />
         </>

@@ -11,10 +11,10 @@ public class PromptTag extends BaseTimeEntity {
     private Long id;
 
     @ManyToOne
-    @JoinColumn(name = "promptId", referencedColumnName = "promptId", nullable = false)
+    @JoinColumn(name = "promptId", referencedColumnName = "prompt_id", nullable = false)
     private Prompt prompt;
 
     @ManyToOne
-    @JoinColumn(name = "tagId", referencedColumnName = "tagId", nullable = false)
+    @JoinColumn(name = "tagId", referencedColumnName = "tag_id", nullable = false)
     private Tag tag;
 }

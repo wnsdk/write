@@ -23,7 +23,7 @@ public class Article extends BaseTimeEntity {
 
     @ManyToOne(fetch = FetchType.LAZY)
     @JoinColumn(name = "prompt_id", nullable = false)
-    private Prompt writingPrompt; // 관련 글감
+    private Prompt Prompt; // 관련 글감
 
     @Lob
     @Column(nullable = false)

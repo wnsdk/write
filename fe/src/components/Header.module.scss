@@ -20,6 +20,18 @@
         width: 100px;
 
         cursor: pointer;
+
+        @media (max-width: $tablet) {
+            margin-left: $horizontal-margin-tablet;
+        }
+
+        @media (max-width: $mobile) {
+            margin-left: $horizontal-margin-mobile;
+        }
+
+        @media (max-width: $small) {
+            margin-left: $horizontal-margin-small;
+        }
     }
 
     .nav {
@@ -39,6 +51,18 @@
     .login {
         width: 100px;
         margin-right: $horizontal-margin;
+
+        @media (max-width: $tablet) {
+            margin-right: $horizontal-margin-tablet;
+        }
+
+        @media (max-width: $mobile) {
+            margin-right: $horizontal-margin-mobile;
+        }
+
+        @media (max-width: $small) {
+            margin-right: $horizontal-margin-small;
+        }
     }
 
     //   .logo {
@@ -46,4 +70,3 @@
     //     height: 50px;
     //   }
 }
-

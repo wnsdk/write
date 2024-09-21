@@ -1,3 +1,11 @@
 $header-height: 70px;
-$horizontal-margin: 150px;
 $gradient: linear-gradient(270deg, #20d2fe, #578cfe, #9e39ff);
+
+$horizontal-margin: 150px;
+$horizontal-margin-tablet: 100px; // max-width: 1024px
+$horizontal-margin-mobile: 50px; // max-width: 768px
+$horizontal-margin-small: 10px; // max-width: 480px
+
+$tablet: 1024px;
+$mobile: 768px;
+$small: 480px;

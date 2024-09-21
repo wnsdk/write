@@ -1,6 +1,7 @@
 package com.example.write.domain.entity;
 
 import com.example.write.domain.BaseTimeEntity;
+import com.example.write.domain.enums.Category;
 import com.example.write.domain.enums.Mode;
 import jakarta.persistence.*;
 import lombok.*;
@@ -22,11 +23,15 @@ public class Prompt extends BaseTimeEntity {
     private Long promptId;
 
     @Column(name = "category", length = 50, nullable = false)
-    private String category;
+    @Enumerated(EnumType.STRING)
+    private Category category;
 
     @Column(name = "mode", nullable = false)
     @Enumerated(EnumType.STRING)
     private Mode mode;
+
+    @Column(name = "title")
+    private String title;
 
     @Lob
     @Column(name = "body")

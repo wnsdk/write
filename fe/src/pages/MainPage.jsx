@@ -1,12 +1,36 @@
-import { useNavigate } from 'react-router-dom';
+import styles from './MainPage.module.scss';
 
 export default function MainPage() {
-    const navigate = useNavigate();
-
     return (
-        <>
-            <button onClick={() => navigate('/list', { state: { mode: 'writing' } })}>작문하기</button>
-            <button onClick={() => navigate('/list', { state: { mode: 'copying' } })}>필사하기</button>
-        </>
+        <div className={styles.container}>
+            <div className={styles.gradient_box}>
+                <span className={styles.main_title}>오늘의 글감</span>
+                <div className={styles.main_box}>
+                    <div className={styles.title_box}>
+                        <div>My Most Memorable Trip</div>
+                        <div>나의 가장 기억에 남는 여행</div>
+                    </div>
+                    <hr />
+                    <div className={styles.meta_data_box}>
+                        <div className={styles.meta_data}>
+                            <div>갈래</div>
+                            <div>에세이</div>
+                        </div>
+                        <div className={styles.meta_data}>
+                            <div>주제</div>
+                            <div>여행</div>
+                        </div>
+                        <div className={styles.meta_data}>
+                            <div>난이도</div>
+                            <div>Intermediate</div>
+                        </div>
+                        <div className={styles.meta_data}>
+                            <div>단어 수</div>
+                            <div>300-500</div>
+                        </div>
+                    </div>
+                </div>
+            </div>
+        </div>
     );
 }

@@ -9,6 +9,8 @@ import CorrectionPage from '@/pages/CorrectionPage';
 import ListPage from '@/pages/ListPage';
 import LoginPage from '@/pages/LoginPage';
 import NotFoundPage from '@/pages/NotFoundPage';
+import ServiceIntroduction from '@/pages/ServiceIntroduction';
+import TranslatingPage from '@/pages/TranslatingPage';
 
 function App() {
     return (
@@ -17,9 +19,11 @@ function App() {
                 <Route element={<Header />}>
                     {/* 헤더, 푸터와 같은 요소와 함께 보여질 페이지들은 여기에 */}
                     <Route path="/" element={<MainPage />} />
+                    <Route path="/ServiceIntroduction" element={<ServiceIntroduction />} />
                     <Route path="/oauth/redirect" element={<MainPage />} />
-                    <Route path="/copying" element={<CopyingPage />} />
-                    <Route path="/writing" element={<WritingPage />} />
+                    <Route path="/copying/:id" element={<CopyingPage />} />
+                    <Route path="/writing/:id" element={<WritingPage />} />
+                    <Route path="/translating/:id" element={<TranslatingPage />} />
                     <Route path="/correction" element={<CorrectionPage />} />
                     <Route path="/list" element={<ListPage />} />
                 </Route>

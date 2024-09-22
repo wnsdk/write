@@ -53,7 +53,7 @@ public class Prompt extends BaseTimeEntity {
     private String descriptionKr;
 
     @Lob
-    @Column(name = "body")
+    @Column(name = "body", columnDefinition = "TEXT")
     private String body;
 
     @OneToMany(mappedBy = "prompt")

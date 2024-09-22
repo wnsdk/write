@@ -1,27 +1,12 @@
 import styles from "./PromptBox.module.scss";
 import { useNavigate } from "react-router-dom";
+import { categories, difficulties } from "@/constants/constants";
 
-const categories = {
-  NOVEL: "소설",
-  ESSAY: "에세이",
-  DIALOGUE: "대화",
-  INTERVIEW: "인터뷰",
-  LETTER: "편지",
-  DIARY: "일기",
-  PLAY: "희곡",
-  Editorial: "논설문",
-};
-
-export default function PromptBox({ prompt }) {
+export default function PromptBox({ prompt, onClick }) {
   const navigate = useNavigate();
 
   return (
-    <div
-      className={styles.main_box}
-      onClick={() => {
-        navigate(`/${prompt.mode}/${prompt.promptId}`);
-      }}
-    >
+    <div className={styles.main_box} onClick={() => onClick()}>
       <div className={styles.title_box}>
         <div>{prompt.title}</div>
         <div>{prompt.titleKr}</div>
@@ -38,7 +23,7 @@ export default function PromptBox({ prompt }) {
         </div>
         <div className={styles.meta_data}>
           <div>난이도</div>
-          <div>{prompt.difficulty}</div>
+          <div>{difficulties[prompt.difficulty]}</div>
         </div>
         {prompt.writer && (
           <div className={styles.meta_data}>

@@ -6,6 +6,7 @@ import PromptBox from "@/components/PromptBox";
 import { useGradientStore } from "@/store/gradientStore";
 import styles from "./ListPage.module.scss";
 import GradientBox from "@/components/GradientBox";
+import PromptIntroModal from "@/components/PromptIntroModal";
 
 export default function ListPage() {
   const location = useLocation();
@@ -16,10 +17,12 @@ export default function ListPage() {
   const [page, setPage] = useState(1); // 현재 페이지를 저장할 상태
   const [totalPages, setTotalPages] = useState(1); // 전체 페이지 수를 저장할 상태
 
+  const [selectedPrompt, setSelectedPrompt] = useState(null);
+
   const isFull = useGradientStore((state) => state.isFull);
 
   const fetchPrompts = async (page, mode) => {
-    const response = await $.get(`/prompt/${mode}?page=${page - 1}&size=4`);
+    const response = await $.get(`/prompt/${mode}?page=${page - 1}&size=3`);
     setTotalPages(response.data.size - 1);
     return response.data;
   };
@@ -37,6 +40,17 @@ export default function ListPage() {
     }
   };
 
+  // 모달 관련
+  const [isModalOpen, setIsModalOpen] = useState(false);
+
+  const openModal = () => {
+    setIsModalOpen(true);
+  };
+
+  const closeModal = () => {
+    setIsModalOpen(false);
+  };
+
   return (
     <>
       {/* {mode === "writing" && <span>작문</span>}
@@ -51,10 +65,23 @@ export default function ListPage() {
       ) : (
         <div className={styles.list}>
           {data.content.map((item, index) => (
-            <PromptBox prompt={item} key={index} />
+            <PromptBox
+              prompt={item}
+              key={index}
+              onClick={() => {
+                openModal();
+                setSelectedPrompt(item);
+              }}
+            />
           ))}
         </div>
       )}
+
+      <PromptIntroModal
+        isOpen={isModalOpen}
+        onClose={closeModal}
+        prompt={selectedPrompt}
+      />
 
       {/* 페이지네이션 버튼 */}
       <div style={{ marginTop: "20px" }}>

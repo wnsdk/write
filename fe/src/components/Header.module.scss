@@ -51,6 +51,33 @@
 
         span {
           cursor: pointer;
+          display: inline-block;
+          font-size: 1.2rem;
+          font-weight: bold;
+          transition: transform 0.1s ease, color 0.5s ease;
+        }
+
+        span:hover {
+          color: #8a8a8a;
+          animation: shake 0.2s ease forwards;
+        }
+
+        @keyframes shake {
+          0% {
+            transform: translateX(-2px);
+          }
+          25% {
+            transform: translateX(2px);
+          }
+          50% {
+            transform: translateX(-2px);
+          }
+          75% {
+            transform: translateX(2px);
+          }
+          100% {
+            transform: translateX(0); /* 원래 위치로 돌아옴 */
+          }
         }
       }
 
@@ -72,18 +99,16 @@
           }
 
           .tooltip {
-            position: absolute; /* 부모 요소를 기준으로 위치 설정 */
+            width: fit-content;
             top: calc(100% + 5px); /* hover 요소 바로 아래 */
             right: 0;
-            transform: translateX(-90%); /* 중앙 정렬 */
+            transform: translateX(-50%); /* 중앙 정렬 */
             background-color: rgba($color: #fff, $alpha: 0.8); /* 박스 색상 */
             box-shadow: 0 4px 8px rgba(0, 0, 0, 0.1);
             color: black;
             border-radius: 7px;
-            z-index: 10; /* 다른 요소 위에 표시 */
+            z-index: 9999; /* 다른 요소 위에 표시 */
 
-            opacity: 0; /* 기본적으로 투명 */
-            visibility: hidden;
             transition: opacity 0.3s ease, visibility 0.3s ease; /* 서서히 나타나는 효과 */
 
             display: flex;

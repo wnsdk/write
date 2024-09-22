@@ -1,16 +1,18 @@
 import { Outlet } from "react-router-dom";
 import { Buffer } from "buffer";
 import { useEffect } from "react";
-import { useNavigate, useSearchParams } from "react-router-dom";
+import { useNavigate, useSearchParams, useLocation } from "react-router-dom";
 import { useLoginStore } from "@/store/loginStore";
 import { authAxios } from "@/apis/authAxios";
 import styles from "./Header.module.scss";
+import { useGradientStore } from "@/store/gradientStore";
 
 export default function Header() {
   const [searchParams] = useSearchParams();
   const navigate = useNavigate();
-  const { email, name, profile, role, accessToken, setAccessToken, setLogout } =
-    useLoginStore();
+  const { profile, accessToken, setLogout } = useLoginStore();
+  const setIsFull = useGradientStore((state) => state.setIsFull);
+  const location = useLocation();
 
   const logout = () => {
     authAxios.post(`/logout`).then(() => {
@@ -37,6 +39,17 @@ export default function Header() {
     }
   }, [searchParams]);
 
+  const handleListNavigate = (mode) => {
+    setIsFull(true); // 확장 상태로 설정
+    if (location.pathname === "/") {
+      setTimeout(() => {
+        navigate("/list", { state: { mode: mode } });
+      }, 500); // 애니메이션 시간과 맞추어 지연
+    } else {
+      navigate("/list", { state: { mode: mode } });
+    }
+  };
+
   // 로그인 상태에 따라 조건부 렌더링
   return (
     <div className={styles.container}>
@@ -50,23 +63,9 @@ export default function Header() {
             <span onClick={() => navigate("/ServiceIntroduction")}>
               서비스 소개
             </span>
-            <span
-              onClick={() => navigate("/list", { state: { mode: "writing" } })}
-            >
-              작문
-            </span>
-            <span
-              onClick={() => navigate("/list", { state: { mode: "copying" } })}
-            >
-              필사
-            </span>
-            <span
-              onClick={() =>
-                navigate("/list", { state: { mode: "translating" } })
-              }
-            >
-              번역
-            </span>
+            <span onClick={() => handleListNavigate("writing")}>작문</span>
+            <span onClick={() => handleListNavigate("copying")}>필사</span>
+            <span onClick={() => handleListNavigate("translating")}>번역</span>
           </nav>
           {!accessToken && (
             <button className={styles.login} onClick={() => navigate("/login")}>
@@ -80,9 +79,10 @@ export default function Header() {
                   className={styles.profile}
                   src={profile}
                   alt="프로필 이미지"
+                  onClick={() => navigate("/my")}
                 />
                 <div className={styles.tooltip}>
-                  <div>마이페이지</div>
+                  <div onClick={() => navigate("/my")}>마이페이지</div>
                   <div onClick={() => logout()}>로그아웃</div>
                 </div>
               </div>

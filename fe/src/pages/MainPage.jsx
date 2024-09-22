@@ -1,36 +1,34 @@
 import styles from "./MainPage.module.scss";
+import PromptBox from "@/components/PromptBox";
+import { useGradientStore } from "@/store/gradientStore";
+import GradientBox from "@/components/GradientBox";
+import { useEffect } from "react";
 
 export default function MainPage() {
+  const isFull = useGradientStore((state) => state.isFull);
+  const setIsFull = useGradientStore((state) => state.setIsFull);
+
+  useEffect(() => {
+    setIsFull(false);
+  }, []);
+
   return (
     <>
-      <div className={styles.gradient_box}></div>
+      {/* <div
+        className={isFull ? styles.gradient_box_full : styles.gradient_box}
+      ></div> */}
+      <GradientBox isFull={isFull} />
       <div className={styles.container}>
         <span className={styles.main_title}>오늘의 글감</span>
-        <div className={styles.main_box}>
-          <div className={styles.title_box}>
-            <div>My Most Memorable Trip</div>
-            <div>나의 가장 기억에 남는 여행</div>
-          </div>
-          <hr />
-          <div className={styles.meta_data_box}>
-            <div className={styles.meta_data}>
-              <div>갈래</div>
-              <div>에세이</div>
-            </div>
-            <div className={styles.meta_data}>
-              <div>주제</div>
-              <div>여행</div>
-            </div>
-            <div className={styles.meta_data}>
-              <div>난이도</div>
-              <div>Intermediate</div>
-            </div>
-            <div className={styles.meta_data}>
-              <div>단어 수</div>
-              <div>300-500</div>
-            </div>
-          </div>
-        </div>
+        <PromptBox
+          prompt={{
+            title: "A Journey Through Time",
+            titleKr: "시간을 넘는 여행",
+            writer: "AI",
+            difficulty: "BEGINNER",
+            category: "NOVEL",
+          }}
+        />
       </div>
     </>
   );

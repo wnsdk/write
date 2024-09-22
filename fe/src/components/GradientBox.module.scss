@@ -1,0 +1,16 @@
+@import "@/constants/variables.scss";
+
+.gradient_box {
+  position: absolute;
+  left: 0;
+  width: 100vw;
+  height: 330px;
+  background: $gradient;
+  z-index: -999;
+
+  transition: height 0.5s ease-in-out;
+}
+
+.full_height {
+  height: calc(100vh - $header-height - 1px);
+}

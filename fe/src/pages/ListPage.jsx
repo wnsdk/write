@@ -3,9 +3,7 @@ import { useEffect, useState } from "react";
 import { useQuery } from "@tanstack/react-query";
 import { $ } from "@/apis/axios";
 import PromptBox from "@/components/PromptBox";
-import { useGradientStore } from "@/store/gradientStore";
 import styles from "./ListPage.module.scss";
-import GradientBox from "@/components/GradientBox";
 import PromptIntroModal from "@/components/PromptIntroModal";
 
 export default function ListPage() {
@@ -18,8 +16,6 @@ export default function ListPage() {
   const [totalPages, setTotalPages] = useState(1); // 전체 페이지 수를 저장할 상태
 
   const [selectedPrompt, setSelectedPrompt] = useState(null);
-
-  const isFull = useGradientStore((state) => state.isFull);
 
   const fetchPrompts = async (page, mode) => {
     const response = await $.get(`/prompt/${mode}?page=${page - 1}&size=3`);
@@ -56,7 +52,6 @@ export default function ListPage() {
       {/* {mode === "writing" && <span>작문</span>}
       {mode === "copying" && <span>필사</span>}
       {mode === "translating" && <span>번역</span>} */}
-      <GradientBox isFull={isFull} />
 
       {isLoading ? (
         <p>Loading...</p>

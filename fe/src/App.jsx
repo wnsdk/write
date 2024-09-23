@@ -1,6 +1,7 @@
 import "./App.css";
-import { Routes, Route } from "react-router-dom";
+import { Routes, Route, useLocation } from "react-router-dom";
 import Header from "@/components/Header";
+import GradientBox from "@/components/GradientBox";
 import MainPage from "@/pages/MainPage";
 import TestPage from "@/pages/TestPage";
 import CopyingPage from "@/pages/CopyingPage";
@@ -14,14 +15,32 @@ import TranslatingPage from "@/pages/TranslatingPage";
 import MyPage from "@/pages/MyPage";
 
 function App() {
+  const location = useLocation();
+  let gradientHeight = 0;
+
+  switch (location.pathname) {
+    case "/":
+    case "/oauth/redirect":
+      gradientHeight = 1;
+      break;
+    case "/list":
+      gradientHeight = 2;
+      break;
+    case "/login":
+      gradientHeight = 3;
+      break;
+    default:
+      gradientHeight = 0;
+  }
   return (
     <>
+      <GradientBox gradientHeight={gradientHeight} />
       <Routes>
         <Route element={<Header />}>
           {/* 헤더, 푸터와 같은 요소와 함께 보여질 페이지들은 여기에 */}
           <Route path="/" element={<MainPage />} />
           <Route
-            path="/ServiceIntroduction"
+            path="/service-introduction"
             element={<ServiceIntroduction />}
           />
           <Route path="/oauth/redirect" element={<MainPage />} />

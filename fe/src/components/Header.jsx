@@ -5,13 +5,13 @@ import { useNavigate, useSearchParams, useLocation } from "react-router-dom";
 import { useLoginStore } from "@/store/loginStore";
 import { authAxios } from "@/apis/authAxios";
 import styles from "./Header.module.scss";
-import { useGradientStore } from "@/store/gradientStore";
+// import { useGradientStore } from "@/store/gradientStore";
 
 export default function Header() {
   const [searchParams] = useSearchParams();
   const navigate = useNavigate();
   const { profile, accessToken, setLogout } = useLoginStore();
-  const setIsFull = useGradientStore((state) => state.setIsFull);
+  // const setIsFull = useGradientStore((state) => state.setIsFull);
   const location = useLocation();
 
   const logout = () => {
@@ -40,7 +40,7 @@ export default function Header() {
   }, [searchParams]);
 
   const handleListNavigate = (mode) => {
-    setIsFull(true); // 확장 상태로 설정
+    // setIsFull(true); // 확장 상태로 설정
     if (location.pathname === "/") {
       setTimeout(() => {
         navigate("/list", { state: { mode: mode } });
@@ -60,7 +60,7 @@ export default function Header() {
             write
           </span>
           <nav className={styles.nav}>
-            <span onClick={() => navigate("/ServiceIntroduction")}>
+            <span onClick={() => navigate("/service-introduction")}>
               서비스 소개
             </span>
             <span onClick={() => handleListNavigate("writing")}>작문</span>

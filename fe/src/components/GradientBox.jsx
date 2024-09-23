@@ -1,12 +1,16 @@
 import styles from "./GradientBox.module.scss";
 
-export default function GradientBox({ isFull }) {
+export default function GradientBox({ gradientHeight }) {
   return (
     <div
       className={
-        isFull
-          ? `${styles.gradient_box} ${styles.full_height}`
-          : styles.gradient_box
+        gradientHeight == 0
+          ? `${styles.gradient_box} ${styles.height_0}`
+          : gradientHeight == 1
+          ? `${styles.gradient_box} ${styles.height_1}`
+          : gradientHeight == 2
+          ? `${styles.gradient_box} ${styles.height_2}`
+          : `${styles.gradient_box} ${styles.height_3}`
       }
     ></div>
   );

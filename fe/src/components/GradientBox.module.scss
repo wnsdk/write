@@ -2,15 +2,29 @@
 
 .gradient_box {
   position: absolute;
+  top: $header-height;
   left: 0;
   width: 100vw;
-  height: 330px;
+
   background: $gradient;
   z-index: -999;
 
-  transition: height 0.5s ease-in-out;
+  transition: height 0.5s ease-in-out, top 0.5s ease-in-out;
 }
 
-.full_height {
+.height_0 {
+  height: 0;
+}
+
+.height_1 {
+  height: 330px;
+}
+
+.height_2 {
   height: calc(100vh - $header-height - 1px);
+}
+
+.height_3 {
+  height: 100vh;
+  top: 0;
 }

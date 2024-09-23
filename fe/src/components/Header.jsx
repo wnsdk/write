@@ -96,6 +96,7 @@ export default function Header() {
                   alt="프로필 이미지"
                   onClick={() => navigate("/my")}
                 />
+
                 <div className={styles.tooltip}>
                   <div onClick={() => navigate("/my")}>마이페이지</div>
                   <div onClick={() => logout()}>로그아웃</div>

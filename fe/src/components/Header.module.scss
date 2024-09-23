@@ -13,7 +13,7 @@
     align-items: center;
     width: 100%;
     height: $header-height;
-    z-index: 0;
+    // z-index: 0;
 
     border-bottom: 1px solid rgb(235, 235, 235);
 
@@ -90,6 +90,8 @@
 
         .hoverBox {
           height: 45px;
+          width: 45px;
+          position: relative;
 
           .profile {
             border-radius: 100%;
@@ -100,15 +102,16 @@
           }
 
           .tooltip {
-            width: fit-content;
-            top: calc(100% + 5px); /* hover 요소 바로 아래 */
+            position: absolute;
+            width: 80px;
+            top: calc(100% + 10px); /* hover 요소 바로 아래 */
             right: 0;
-            transform: translateX(-50%); /* 중앙 정렬 */
+
             background-color: rgba($color: #fff, $alpha: 0.8); /* 박스 색상 */
             box-shadow: 0 4px 8px rgba(0, 0, 0, 0.1);
             color: black;
             border-radius: 7px;
-            z-index: 9999; /* 다른 요소 위에 표시 */
+            z-index: 99999; /* 다른 요소 위에 표시 */
 
             transition: opacity 0.3s ease, visibility 0.3s ease; /* 서서히 나타나는 효과 */
 

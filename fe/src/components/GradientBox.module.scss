@@ -7,8 +7,8 @@
   width: 100vw;
 
   background: $gradient;
-  z-index: 1;
   pointer-events: none;
+  // z-index: -1;
 
   transition: height 0.5s ease-in-out, top 0.5s ease-in-out;
 }
@@ -27,5 +27,6 @@
 
 .height3 {
   height: 100vh;
+  // z-index: 1;
   top: 0;
 }

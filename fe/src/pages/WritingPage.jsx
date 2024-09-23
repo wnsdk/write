@@ -1,7 +1,7 @@
 import { useState } from "react";
 import { useParams, useNavigate } from "react-router-dom";
 import Sidebar from "@/components/Sidebar";
-import styles from "./writingPage.module.scss";
+import styles from "./WritingPage.module.scss";
 import { useQuery } from "@tanstack/react-query";
 import { authAxios } from "@/apis/authAxios";
 import InputTextArea from "@/components/InputTextArea";
@@ -40,7 +40,8 @@ export default function WritingPage() {
         toggleSidebar={toggleSidebar}
         onSubmit={handleSubmit}
       />
-      <div>{data.title}</div>
+      {!isLoading && <div>{data.title}</div>}
+
       <InputTextArea value={text} onChange={(e) => setText(e.target.value)} />
     </div>
   );

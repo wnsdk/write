@@ -5,7 +5,7 @@ export default function MainPage() {
   return (
     <>
       <div className={styles.container}>
-        <span className={styles.main_title}>오늘의 글감</span>
+        <span className={styles.mainTitle}>오늘의 글감</span>
         <PromptBox
           prompt={{
             title: "A Journey Through Time",

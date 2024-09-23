@@ -5,6 +5,7 @@ import { $ } from "@/apis/axios";
 import PromptBox from "@/components/PromptBox";
 import styles from "./ListPage.module.scss";
 import PromptIntroModal from "@/components/PromptIntroModal";
+import { motion } from "framer-motion";
 
 export default function ListPage() {
   const location = useLocation();
@@ -18,7 +19,9 @@ export default function ListPage() {
   const [selectedPrompt, setSelectedPrompt] = useState(null);
 
   const fetchPrompts = async (page, mode) => {
-    const response = await $.get(`/prompt/${mode}?page=${page - 1}&size=3`);
+    const response = await $.get(
+      `/prompt/list/${mode}?page=${page - 1}&size=3`
+    );
     setTotalPages(response.data.size - 1);
     return response.data;
   };
@@ -58,18 +61,24 @@ export default function ListPage() {
       ) : error ? (
         <>{error.message}</>
       ) : (
-        <div className={styles.list}>
-          {data.content.map((item, index) => (
-            <PromptBox
-              prompt={item}
-              key={index}
-              onClick={() => {
-                openModal();
-                setSelectedPrompt(item);
-              }}
-            />
-          ))}
-        </div>
+        <motion.div
+          initial={{ opacity: 0 }}
+          animate={{ opacity: 1 }}
+          transition={{ duration: 1, ease: "easeIn" }}
+        >
+          <div className={styles.list}>
+            {data.content.map((item, index) => (
+              <PromptBox
+                prompt={item}
+                key={index}
+                onClick={() => {
+                  openModal();
+                  setSelectedPrompt(item);
+                }}
+              />
+            ))}
+          </div>
+        </motion.div>
       )}
 
       <PromptIntroModal

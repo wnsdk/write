@@ -13,10 +13,11 @@
     align-items: center;
     width: 100%;
     height: $header-height;
+    z-index: 0;
 
     border-bottom: 1px solid rgb(235, 235, 235);
 
-    .header_container {
+    .headerContainer {
       width: $container-width;
       display: flex;
 
@@ -87,7 +88,7 @@
         // justify-content: center;
         align-items: center;
 
-        .hover_box {
+        .hoverBox {
           height: 45px;
 
           .profile {
@@ -127,17 +128,17 @@
           }
         }
 
-        .hover_box:hover .tooltip {
+        .hoverBox:hover .tooltip {
           visibility: visible;
           opacity: 1;
         }
 
-        .hover_box:not(:hover) .tooltip {
+        .hoverBox:not(:hover) .tooltip {
           opacity: 0; /* 사라질 때 투명하게 설정 */
           visibility: hidden; /* 숨김 */
         }
 
-        .hover_box:hover {
+        .hoverBox:hover {
           pointer-events: auto; /* 프로필과 tooltip 간의 이벤트를 유지 */
         }
       }
@@ -145,6 +146,7 @@
   }
 
   .outlet {
+    z-index: 1;
     width: $container-width;
     @media (max-width: $tablet) {
       width: $container-width-tablet;

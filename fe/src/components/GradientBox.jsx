@@ -5,12 +5,12 @@ export default function GradientBox({ gradientHeight }) {
     <div
       className={
         gradientHeight == 0
-          ? `${styles.gradient_box} ${styles.height_0}`
+          ? `${styles.gradientBox} ${styles.height0}`
           : gradientHeight == 1
-          ? `${styles.gradient_box} ${styles.height_1}`
+          ? `${styles.gradientBox} ${styles.height1}`
           : gradientHeight == 2
-          ? `${styles.gradient_box} ${styles.height_2}`
-          : `${styles.gradient_box} ${styles.height_3}`
+          ? `${styles.gradientBox} ${styles.height2}`
+          : `${styles.gradientBox} ${styles.height3}`
       }
     ></div>
   );

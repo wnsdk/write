@@ -1,6 +1,6 @@
 @import "@/constants/variables.scss";
 
-.modal_overlay {
+.modalOverlay {
   position: fixed;
   top: 0;
   left: 0;
@@ -75,7 +75,7 @@
       line-height: 2;
     }
 
-    .no_body {
+    .noBody {
       margin-top: 20px;
       border-top: 1px solid rgb(206, 206, 206);
       flex: 1;
@@ -99,17 +99,17 @@
       font-size: 1.8rem;
       margin-bottom: 8px;
     }
-    .mode_description {
+    .modeDescription {
       width: 90%;
       font-size: 0.9rem;
       color: #5c5c5c;
       margin-bottom: 30px;
     }
 
-    .meta_data_container {
+    .metaDataContainer {
       flex: 1;
 
-      .meta_data {
+      .metaData {
         display: flex;
         margin-bottom: 10px;
 

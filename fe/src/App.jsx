@@ -1,7 +1,6 @@
 import "./App.css";
-import { Routes, Route, useLocation } from "react-router-dom";
+import { Routes, Route } from "react-router-dom";
 import Header from "@/components/Header";
-import GradientBox from "@/components/GradientBox";
 import MainPage from "@/pages/MainPage";
 import TestPage from "@/pages/TestPage";
 import CopyingPage from "@/pages/CopyingPage";
@@ -15,26 +14,8 @@ import TranslatingPage from "@/pages/TranslatingPage";
 import MyPage from "@/pages/MyPage";
 
 function App() {
-  const location = useLocation();
-  let gradientHeight = 0;
-
-  switch (location.pathname) {
-    case "/":
-    case "/oauth/redirect":
-      gradientHeight = 1;
-      break;
-    case "/list":
-      gradientHeight = 2;
-      break;
-    case "/login":
-      gradientHeight = 3;
-      break;
-    default:
-      gradientHeight = 0;
-  }
   return (
     <>
-      <GradientBox gradientHeight={gradientHeight} />
       <Routes>
         <Route element={<Header />}>
           {/* 헤더, 푸터와 같은 요소와 함께 보여질 페이지들은 여기에 */}
@@ -45,15 +26,16 @@ function App() {
           />
           <Route path="/oauth/redirect" element={<MainPage />} />
           <Route path="/my" element={<MyPage />} />
-          <Route path="/copying/:id" element={<CopyingPage />} />
-          <Route path="/writing/:id" element={<WritingPage />} />
-          <Route path="/translating/:id" element={<TranslatingPage />} />
-          <Route path="/correction" element={<CorrectionPage />} />
           <Route path="/list" element={<ListPage />} />
+          <Route path="/correction" element={<CorrectionPage />} />
+
+          <Route path="/login" element={<LoginPage />} />
+          <Route path="/writing/:id" element={<WritingPage />} />
+          <Route path="/copying/:id" element={<CopyingPage />} />
+          <Route path="/translating/:id" element={<TranslatingPage />} />
         </Route>
 
         {/* 단독으로 보여질 페이지들은 여기에 */}
-        <Route path="/login" element={<LoginPage />} />
         <Route path="/test" element={<TestPage />} />
         <Route path="*" element={<NotFoundPage />} />
       </Routes>

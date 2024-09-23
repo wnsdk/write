@@ -1,9 +1,9 @@
-.main_box:hover {
+.mainBox:hover {
   background-color: rgba($color: #000000, $alpha: 0.2);
   box-shadow: 0 8px 16px rgba(0, 0, 0, 0.2);
 }
 
-.main_box {
+.mainBox {
   display: flex;
   flex-direction: column;
   align-items: start;
@@ -21,7 +21,7 @@
   cursor: pointer;
   transition: background-color 0.5s ease, box-shadow 0.3s ease;
 
-  .title_box {
+  .titleBox {
     display: flex;
     flex-direction: column;
     align-items: flex-start;
@@ -42,13 +42,13 @@
     box-shadow: 0 1px 0 rgba($color: #fff, $alpha: 0.8);
   }
 
-  .meta_data_box {
+  .metaDataBox {
     display: flex;
     flex-direction: column;
     align-items: flex-start;
     gap: 10px;
 
-    .meta_data {
+    .metaData {
       display: flex;
       text-align: left;
       div:first-child {

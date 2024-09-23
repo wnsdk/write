@@ -5,13 +5,12 @@ import { useNavigate, useSearchParams, useLocation } from "react-router-dom";
 import { useLoginStore } from "@/store/loginStore";
 import { authAxios } from "@/apis/authAxios";
 import styles from "./Header.module.scss";
-// import { useGradientStore } from "@/store/gradientStore";
+import GradientBox from "@/components/GradientBox";
 
 export default function Header() {
   const [searchParams] = useSearchParams();
   const navigate = useNavigate();
   const { profile, accessToken, setLogout } = useLoginStore();
-  // const setIsFull = useGradientStore((state) => state.setIsFull);
   const location = useLocation();
 
   const logout = () => {
@@ -40,21 +39,37 @@ export default function Header() {
   }, [searchParams]);
 
   const handleListNavigate = (mode) => {
-    // setIsFull(true); // 확장 상태로 설정
-    if (location.pathname === "/") {
-      setTimeout(() => {
-        navigate("/list", { state: { mode: mode } });
-      }, 500); // 애니메이션 시간과 맞추어 지연
-    } else {
-      navigate("/list", { state: { mode: mode } });
-    }
+    navigate("/list", { state: { mode: mode } });
   };
+
+  // 그라디언트 박스
+  let gradientHeight = 0;
+
+  switch (true) {
+    case location.pathname === "/":
+    case location.pathname === "/oauth/redirect":
+      gradientHeight = 1;
+      break;
+    case location.pathname === "/list":
+    case location.pathname === "/correction":
+      gradientHeight = 2;
+      break;
+    case location.pathname === "/login":
+    case location.pathname.startsWith("/writing"):
+    case location.pathname.startsWith("/copying"):
+    case location.pathname.startsWith("/translating"):
+      gradientHeight = 3;
+      break;
+    default:
+      gradientHeight = 0;
+  }
 
   // 로그인 상태에 따라 조건부 렌더링
   return (
     <div className={styles.container}>
+      <GradientBox gradientHeight={gradientHeight} />
       <div className={styles.header}>
-        <div className={styles.header_container}>
+        <div className={styles.headerContainer}>
           {/* <img className={styles.logo} src="/icon_circle.png" alt="logo" /> */}
           <span className={styles.title} onClick={() => navigate("/")}>
             write
@@ -74,7 +89,7 @@ export default function Header() {
           )}
           {accessToken && (
             <div className={styles.login}>
-              <div className={styles.hover_box}>
+              <div className={styles.hoverBox}>
                 <img
                   className={styles.profile}
                   src={profile}
@@ -90,6 +105,7 @@ export default function Header() {
           )}
         </div>
       </div>
+
       <div className={styles.outlet}>
         <Outlet />
       </div>

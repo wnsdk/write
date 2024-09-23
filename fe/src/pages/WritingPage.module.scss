@@ -1,0 +1,10 @@
+@import "@/constants/variables.scss";
+
+.container {
+  transition: margin-left 0.3s ease;
+  margin-left: 0;
+
+  &.sidebarOpen {
+    margin-left: calc($sidebar-width / 1.2);
+  }
+}

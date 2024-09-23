@@ -7,9 +7,7 @@ export default function PromptIntroModal({ isOpen, onClose, prompt }) {
 
   return (
     <div
-      className={`${styles.modal_overlay} ${
-        isOpen ? styles.show : styles.hide
-      }`}
+      className={`${styles.modalOverlay} ${isOpen ? styles.show : styles.hide}`}
       onClick={onClose}
     >
       {isOpen && (
@@ -21,7 +19,7 @@ export default function PromptIntroModal({ isOpen, onClose, prompt }) {
             <div className={styles.description}>{prompt.description}</div>
             <div className={styles.kr}>{prompt.descriptionKr}</div>
             {!prompt.body ? (
-              <div className={styles.no_body}>
+              <div className={styles.noBody}>
                 작성 중인 글이 없습니다. 작문을 시작해보세요
               </div>
             ) : (
@@ -30,7 +28,7 @@ export default function PromptIntroModal({ isOpen, onClose, prompt }) {
           </div>
           <div className={styles.right}>
             <div className={styles.mode}>{modes[prompt.mode]}하기</div>
-            <div className={styles.mode_description}>
+            <div className={styles.modeDescription}>
               {prompt.mode === "WRITING"
                 ? "주제에 대한 생각을 글로 표현하여 영어 실력을 강화하고 자신감을 높여보세요"
                 : prompt.mode === "COPYING"
@@ -38,26 +36,28 @@ export default function PromptIntroModal({ isOpen, onClose, prompt }) {
                 : "주어진 글을 영어로 번역해 보기 전, 지문을 먼저 훑어보며 준비를 해봅시다"}
             </div>
 
-            <div className={styles.meta_data_container}>
-              <div className={styles.meta_data}>
+            <div className={styles.metaDataContainer}>
+              <div className={styles.metaData}>
                 <div>갈래</div>
                 <div>{categories[prompt.category]}</div>
               </div>
-              <div className={styles.meta_data}>
+              <div className={styles.metaData}>
                 <div>난이도</div>
                 <div>{difficulties[prompt.difficulty]}</div>
               </div>
-              <div className={styles.meta_data}>
+              <div className={styles.metaData}>
                 <div>작가</div>
                 <div>{prompt.writer}</div>
               </div>
             </div>
-            {/* <div className={styles.meta_data}>
+            {/* <div className={styles.metaData}>
               <div>소재</div>
               <div>{prompt.}</div>
             </div> */}
             <button
-              onClick={() => navigate(`/${prompt.mode}/${prompt.promptId}`)}
+              onClick={() =>
+                navigate(`/${prompt.mode.toLowerCase()}/${prompt.promptId}`)
+              }
             >
               시작하기
             </button>

@@ -3,6 +3,7 @@ package com.example.write.exception;
 import org.springframework.http.HttpStatus;
 
 public enum ErrorMessage {
+    CONTENT_NOT_EXIST(100, "콘텐츠가 존재하지 않습니다.", HttpStatus.NOT_FOUND),
     EXIST_USER(201, "이미 가입한 유저입니다.", HttpStatus.BAD_REQUEST),
     NOT_EXIST_USER(202, "존재하지 않는 유저입니다.", HttpStatus.BAD_REQUEST),
     DELETED_USER(203, "탈퇴한 유저입니다.", HttpStatus.BAD_REQUEST),

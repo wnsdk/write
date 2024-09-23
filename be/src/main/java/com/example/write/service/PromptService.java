@@ -7,4 +7,6 @@ import org.springframework.data.domain.Pageable;
 
 public interface PromptService {
     Page<Prompt> findByMode(Pageable pageable, Mode mode);
+
+    Prompt findById(Long id);
 }

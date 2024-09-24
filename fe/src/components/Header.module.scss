@@ -1,166 +1,179 @@
-@import "@/constants/variables.scss";
+@import '@/constants/variables.scss';
 
 .container {
-  display: flex;
-  flex-direction: column;
-  align-items: center;
-  width: 100vw;
-  min-height: 100vh;
-
-  .header {
     display: flex;
-    justify-content: center;
+    flex-direction: column;
     align-items: center;
-    width: 100%;
-    height: $header-height;
-    // z-index: 0;
+    width: 100vw;
+    min-height: 100vh;
 
-    border-bottom: 1px solid rgb(235, 235, 235);
+    .headerVisible {
+        opacity: 1;
+        z-index: 10;
+    }
 
-    .headerContainer {
-      width: $container-width;
-      display: flex;
+    .headerHidden {
+        opacity: 0;
+        z-index: -10;
+    }
 
-      @media (max-width: $tablet) {
-        width: $container-width-tablet;
-      }
-
-      @media (max-width: $mobile) {
-        width: $container-width-mobile;
-      }
-
-      @media (max-width: $small) {
-        width: $container-width-small;
-      }
-
-      .title {
-        font-family: "Pacifico", sans-serif;
-        font-size: 40px;
-        width: 100px;
-
-        cursor: pointer;
-      }
-
-      .nav {
-        flex-grow: 1; // .title과 .login을 제외한 나머지 공간을 차지하도록 설정
-        margin-left: 20px;
-
+    .header {
         display: flex;
-        align-items: center; // 세로 중앙 정렬
-        justify-content: flex-start; // 왼쪽으로 정렬
-        gap: 30px; // 요소들 사이의 간격 설정
-
-        span {
-          cursor: pointer;
-          display: inline-block;
-          font-size: 1.2rem;
-          font-weight: bold;
-          transition: transform 0.1s ease, color 0.5s ease;
-        }
-
-        span:hover {
-          color: #8a8a8a;
-          animation: shake 0.2s ease forwards;
-        }
-
-        @keyframes shake {
-          0% {
-            transform: translateX(-2px);
-          }
-          25% {
-            transform: translateX(2px);
-          }
-          50% {
-            transform: translateX(-2px);
-          }
-          75% {
-            transform: translateX(2px);
-          }
-          100% {
-            transform: translateX(0); /* 원래 위치로 돌아옴 */
-          }
-        }
-      }
-
-      .login {
-        width: 100px;
-        display: flex;
-        // justify-content: center;
+        justify-content: center;
         align-items: center;
+        width: 100%;
+        height: $header-height;
 
-        .hoverBox {
-          height: 45px;
-          width: 45px;
-          position: relative;
+        transition: opacity 0.5s ease, transform 0.5s ease; // opacity와 transform에 부드러운 전환 효과
+        transform: translateY(0); // 기본 위치
 
-          .profile {
-            border-radius: 100%;
-            width: 45px;
-            height: 45px;
-            cursor: pointer;
-            position: relative; /* 툴팁의 위치를 기준으로 설정 */
-          }
+        box-shadow: 2px 2px 5px rgba(0, 0, 0, 0.2);
+        background-color: white;
 
-          .tooltip {
-            position: absolute;
-            width: 80px;
-            top: calc(100% + 10px); /* hover 요소 바로 아래 */
-            right: 0;
-
-            background-color: rgba($color: #fff, $alpha: 0.8); /* 박스 색상 */
-            box-shadow: 0 4px 8px rgba(0, 0, 0, 0.1);
-            color: black;
-            border-radius: 7px;
-            z-index: 99999; /* 다른 요소 위에 표시 */
-
-            transition: opacity 0.3s ease, visibility 0.3s ease; /* 서서히 나타나는 효과 */
-
+        .headerContent {
+            width: $container-width;
             display: flex;
-            flex-direction: column;
-            align-items: flex-start;
-            padding: 10px 20px;
-            gap: 10px;
 
-            > div {
-              cursor: pointer;
-              transition: background-color 0.3s ease;
+            @media (max-width: $tablet) {
+                width: $container-width-tablet;
             }
-            > div:hover {
-              background-color: rgba($color: #000000, $alpha: 0.2);
+
+            @media (max-width: $mobile) {
+                width: $container-width-mobile;
             }
-          }
+
+            @media (max-width: $small) {
+                width: $container-width-small;
+            }
+
+            .title {
+                font-family: 'Pacifico', sans-serif;
+                font-size: 40px;
+                width: 100px;
+
+                cursor: pointer;
+            }
+
+            .nav {
+                flex-grow: 1; // .title과 .login을 제외한 나머지 공간을 차지하도록 설정
+                margin-left: 20px;
+
+                display: flex;
+                align-items: center; // 세로 중앙 정렬
+                justify-content: flex-start; // 왼쪽으로 정렬
+                gap: 30px; // 요소들 사이의 간격 설정
+
+                span {
+                    cursor: pointer;
+                    display: inline-block;
+                    font-size: 1.2rem;
+                    font-weight: bold;
+                    transition: transform 0.1s ease, color 0.5s ease;
+                }
+
+                span:hover {
+                    color: #8a8a8a;
+                    animation: shake 0.2s ease forwards;
+                }
+
+                @keyframes shake {
+                    0% {
+                        transform: translateX(-2px);
+                    }
+                    25% {
+                        transform: translateX(2px);
+                    }
+                    50% {
+                        transform: translateX(-2px);
+                    }
+                    75% {
+                        transform: translateX(2px);
+                    }
+                    100% {
+                        transform: translateX(0); /* 원래 위치로 돌아옴 */
+                    }
+                }
+            }
+
+            .login {
+                width: 100px;
+                display: flex;
+                // justify-content: center;
+                align-items: center;
+
+                .hoverBox {
+                    height: 45px;
+                    width: 45px;
+                    position: relative;
+
+                    .profile {
+                        border-radius: 100%;
+                        width: 45px;
+                        height: 45px;
+                        cursor: pointer;
+                    }
+
+                    .tooltip {
+                        position: absolute;
+                        width: 80px;
+                        top: calc(100% + 10px); /* hover 요소 바로 아래 */
+                        right: 0;
+
+                        background-color: rgba($color: #fff, $alpha: 0.8); /* 박스 색상 */
+                        box-shadow: 0 4px 8px rgba(0, 0, 0, 0.1);
+                        color: black;
+                        border-radius: 7px;
+
+                        transition: opacity 0.3s ease, visibility 0.3s ease; /* 서서히 나타나는 효과 */
+
+                        display: flex;
+                        flex-direction: column;
+                        align-items: flex-start;
+                        padding: 10px 20px;
+                        gap: 10px;
+
+                        z-index: 99999; /* 다른 요소 위에 표시 */
+
+                        > div {
+                            cursor: pointer;
+                            transition: background-color 0.3s ease;
+                        }
+                        > div:hover {
+                            background-color: rgba($color: #000000, $alpha: 0.2);
+                        }
+                    }
+                }
+
+                .hoverBox:hover .tooltip {
+                    visibility: visible;
+                    opacity: 1;
+                }
+
+                .hoverBox:not(:hover) .tooltip {
+                    opacity: 0; /* 사라질 때 투명하게 설정 */
+                    visibility: hidden; /* 숨김 */
+                }
+
+                .hoverBox:hover {
+                    pointer-events: auto; /* 프로필과 tooltip 간의 이벤트를 유지 */
+                }
+            }
+        }
+    }
+
+    .outlet {
+        z-index: 1;
+        width: $container-width;
+        @media (max-width: $tablet) {
+            width: $container-width-tablet;
         }
 
-        .hoverBox:hover .tooltip {
-          visibility: visible;
-          opacity: 1;
+        @media (max-width: $mobile) {
+            width: $container-width-mobile;
         }
 
-        .hoverBox:not(:hover) .tooltip {
-          opacity: 0; /* 사라질 때 투명하게 설정 */
-          visibility: hidden; /* 숨김 */
+        @media (max-width: $small) {
+            width: $container-width-small;
         }
-
-        .hoverBox:hover {
-          pointer-events: auto; /* 프로필과 tooltip 간의 이벤트를 유지 */
-        }
-      }
     }
-  }
-
-  .outlet {
-    z-index: 1;
-    width: $container-width;
-    @media (max-width: $tablet) {
-      width: $container-width-tablet;
-    }
-
-    @media (max-width: $mobile) {
-      width: $container-width-mobile;
-    }
-
-    @media (max-width: $small) {
-      width: $container-width-small;
-    }
-  }
 }

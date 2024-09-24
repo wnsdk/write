@@ -1,48 +1,50 @@
-import { useState } from "react";
-import { useParams, useNavigate } from "react-router-dom";
-import Sidebar from "@/components/Sidebar";
-import styles from "./WritingPage.module.scss";
-import { useQuery } from "@tanstack/react-query";
-import { authAxios } from "@/apis/authAxios";
-import InputTextArea from "@/components/InputTextArea";
+import { useState, useEffect } from 'react';
+import { useParams } from 'react-router-dom';
+import Sidebar from '@/components/Sidebar';
+import styles from './WritingPage.module.scss';
+import { authAxios } from '@/apis/authAxios';
+import InputTextArea from '@/components/InputTextArea';
 
 export default function WritingPage() {
-  const navigate = useNavigate();
-  const { id } = useParams();
+    const { promptId } = useParams();
 
-  const [isOpen, setIsOpen] = useState(false);
+    const [isOpen, setIsOpen] = useState(true);
+    const [prompt, setPrompt] = useState(null);
+    const [article, setArticle] = useState(null);
+    const [text, setText] = useState('');
 
-  const toggleSidebar = () => {
-    setIsOpen((prev) => !prev);
-  };
+    const toggleSidebar = () => {
+        setIsOpen((prev) => !prev);
+    };
 
-  const fetchPrompt = async (id) => {
-    const response = await authAxios.get(`/prompt/${id}`);
-    return response.data;
-  };
+    const fetchPrompt = async (promptId) => {
+        const response = await authAxios.get(`/prompt/${promptId}`);
+        setPrompt(response.data);
+    };
 
-  const { data, error, isLoading } = useQuery({
-    queryKey: ["prompt"],
-    queryFn: () => fetchPrompt(id),
-    keepPreviousData: true, // 이전 데이터 유지
-  });
+    const fetchArticle = async (promptId) => {
+        const response = await authAxios.get(`/article/${promptId}`);
+        setArticle(response.data);
+        setText(response.data.body);
+        console.log(response.data);
 
-  const [text, setText] = useState("");
+        return response.data;
+    };
 
-  const handleSubmit = () => {
-    navigate("/correction");
-  };
+    useEffect(() => {
+        const fetchData = async () => {
+            await fetchPrompt(promptId);
+            await fetchArticle(promptId);
+        };
 
-  return (
-    <div className={`${styles.container} ${isOpen ? styles.sidebarOpen : ""}`}>
-      <Sidebar
-        isOpen={isOpen}
-        toggleSidebar={toggleSidebar}
-        onSubmit={handleSubmit}
-      />
-      {!isLoading && <div>{data.title}</div>}
+        fetchData();
+    }, []);
 
-      <InputTextArea value={text} onChange={(e) => setText(e.target.value)} />
-    </div>
-  );
+    return (
+        <div className={`${styles.container} ${isOpen ? styles.sidebarOpen : ''}`}>
+            <Sidebar isOpen={isOpen} toggleSidebar={toggleSidebar} body={text} promptId={promptId} article={article} />
+            {prompt != null && <div className={styles.title}>{prompt.title}</div>}
+            <InputTextArea value={text} onChange={(e) => setText(e.target.value)} />
+        </div>
+    );
 }

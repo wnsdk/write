@@ -37,7 +37,7 @@ public class JwtProvider {
     //    private static final long ACCESS_TOKEN_EXPIRE_TIME = 30 * 24 * 60 * 60 * 1000L;     // 30일
 
     @Value("${jwt.refresh-token-expire-time}")
-    private long REFRESH_TOKEN_EXPIRE_TIME;    // 90일
+    private long REFRESH_TOKEN_EXPIRE_TIME;
 //    private static final long REFRESH_TOKEN_EXPIRE_TIME = 90 * 24 * 60 * 60 * 1000L;    // 90일
 
     private final Key key;

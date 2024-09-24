@@ -18,8 +18,8 @@ spring:
 jwt:
   # $openssl rand -hex 64
   secret: ENC(hx4BlQzG2/B8QUoZB2VDCujxEo7n0EaR66qCLmlk8e0OBLbsXCtArHKfLAp28JgKMg15YfVG5HhtdUpPvUwEZVT8Joh8Y9nYTwnd9tJyhJA=)
-  access-token-expire-time: 20000     # 1000 == 1 second
-  refresh-token-expire-time: 50000
+  access-token-expire-time: 1800000     # 1000 == 1 second
+  refresh-token-expire-time: 604800000  # 1 week
 
 jasypt:
   encryptor:

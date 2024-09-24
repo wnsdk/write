@@ -12,6 +12,7 @@ public enum ErrorMessage {
     ACCESS_TOKEN_EXPIRE(1000, "access 토큰이 만료되었습니다.", HttpStatus.UNAUTHORIZED),
     ACCESS_TOKEN_INVALID(1001, "토큰이 잘못되었습니다.", HttpStatus.UNAUTHORIZED),
     ACCESS_TOKEN_NOT_LOAD(1002, "토큰을 불러오지 못하였습니다.", HttpStatus.UNAUTHORIZED),
+    ACCESS_DENIED(1003, "권한이 없습니다.", HttpStatus.FORBIDDEN),
     ACCESS_TOKEN_INVALID_STRUCT(1010, "토큰이 구조가 잘못되었습니다.", HttpStatus.UNAUTHORIZED),
     ACCESS_TOKEN_INVALID_HEADER(1011, "토큰 해더가 손상되었습니다.", HttpStatus.UNAUTHORIZED),
     ACCESS_TOKEN_INVALID_PAYLOADS(1012, "토큰 정보가 손상되었습니다.", HttpStatus.UNAUTHORIZED),

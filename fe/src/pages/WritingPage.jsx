@@ -3,14 +3,21 @@ import { useNavigate, useLocation } from "react-router-dom";
 import Sidebar from "@/components/Sidebar";
 import styles from "./WritingPage.module.scss";
 import { authAxios } from "@/apis/authAxios";
-import InputTextArea from "@/components/InputTextArea";
 import Button from "@/components/Button";
-import { correctWriting } from "@/apis/openai"; // API 함수 임포트
+import {
+  correctWriting,
+  correctCopying,
+  correctTranslating,
+} from "@/apis/openai";
+import Copying from "@/components/Copying";
+import Writing from "@/components/Writing";
+import Translating from "@/components/Translating";
 
 export default function WritingPage() {
   const navigate = useNavigate();
   const location = useLocation();
   const { prompt } = location.state || {};
+  console.log(prompt);
 
   const [isOpen, setIsOpen] = useState(true);
   const [article, setArticle] = useState(null);
@@ -24,18 +31,12 @@ export default function WritingPage() {
     const response = await authAxios.get(`/article/${promptId}`);
     setArticle(response.data);
     setText(response.data.body);
-    console.log(response.data);
-
     return response.data;
   };
 
   useEffect(() => {
-    const fetchData = async () => {
-      await fetchArticle(prompt.promptId);
-    };
-
-    fetchData();
-  }, []);
+    fetchArticle(prompt.promptId);
+  }, [prompt]);
 
   const saveArticle = () => {
     const articleData = { body: text, promptId: prompt.promptId };
@@ -53,8 +54,14 @@ export default function WritingPage() {
     if (confirmSubmit) {
       saveArticle();
       try {
-        const structuredResponse = await correctWriting(text, prompt.title);
-        console.log(structuredResponse);
+        let structuredResponse;
+        if (prompt.mode === "WRITING") {
+          structuredResponse = await correctWriting(text, prompt.title);
+        } else if (prompt.mode === "COPYING") {
+          structuredResponse = await correctCopying(text, prompt.body);
+        } else {
+          structuredResponse = await correctTranslating(text, prompt.body);
+        }
 
         let correctionResult;
         try {
@@ -62,10 +69,9 @@ export default function WritingPage() {
         } catch (error) {
           console.error("Error parsing JSON:", error);
         }
-        console.log(correctionResult);
 
         navigate("/correction", {
-          state: { correctionResult: correctionResult },
+          state: { correctionResult: correctionResult, prompt: prompt },
         });
       } catch (error) {
         console.error("Error:", error);
@@ -90,12 +96,25 @@ export default function WritingPage() {
               {prompt.title}
               <span>{prompt.titleKr}</span>
             </div>
-
-            <div className={styles.explanation}>
-              주제에 맞는 글을 영어로 작성해보세요! <br />
-              오로지 영어와 일부 특수문자, 숫자만 입력 가능합니다. 저장만 하고
-              나중에 다시 와서 작성하는 것도 가능합니다.
-            </div>
+            {prompt.mode === "WRITING" ? (
+              <div className={styles.explanation}>
+                주제에 맞는 글을 영어로 작성해보세요! <br />
+                오로지 영어와 일부 특수문자, 숫자만 입력 가능합니다. 저장만 하고
+                나중에 다시 와서 작성하는 것도 가능합니다.
+              </div>
+            ) : prompt.mode === "COPYING" ? (
+              <div className={styles.explanation}>
+                글을 따라쓰면서 영어 작문 실력을 길러보세요! <br />
+                오로지 영어와 일부 특수문자, 숫자만 입력 가능합니다. 저장만 하고
+                나중에 다시 와서 작성하는 것도 가능합니다.
+              </div>
+            ) : (
+              <div className={styles.explanation}>
+                한글로 된 글을 영어로 번역해보세요! <br />
+                오로지 영어와 일부 특수문자, 숫자만 입력 가능합니다. 저장만 하고
+                나중에 다시 와서 작성하는 것도 가능합니다.
+              </div>
+            )}
           </div>
 
           <div className={styles.buttons}>
@@ -114,7 +133,21 @@ export default function WritingPage() {
           </div>
         </div>
 
-        <InputTextArea value={text} onChange={(e) => setText(e.target.value)} />
+        {prompt.mode === "WRITING" ? (
+          <Writing value={text} onChange={(e) => setText(e.target.value)} />
+        ) : prompt.mode === "COPYING" ? (
+          <Copying
+            value={text}
+            onChange={(e) => setText(e.target.value)}
+            prompt={prompt}
+          />
+        ) : (
+          <Translating
+            value={text}
+            onChange={(e) => setText(e.target.value)}
+            prompt={prompt}
+          />
+        )}
       </div>
     </div>
   );

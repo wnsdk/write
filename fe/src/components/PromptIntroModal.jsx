@@ -55,7 +55,7 @@ export default function PromptIntroModal({ isOpen, onClose, prompt }) {
             </div> */}
             <Button
               onClick={() =>
-                navigate(`/${prompt.mode.toLowerCase()}/${prompt.promptId}`, {
+                navigate(`/writing/${prompt.promptId}`, {
                   state: { prompt: prompt },
                 })
               }

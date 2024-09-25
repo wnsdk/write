@@ -3,7 +3,7 @@ import styles from "./CorrectionPage.module.scss";
 
 export default function CorrectionPage() {
   const location = useLocation();
-  const { correctionResult } = location.state || {};
+  const { correctionResult, prompt } = location.state || {};
   console.log(correctionResult);
 
   const highlight = (originalText) => {
@@ -19,18 +19,24 @@ export default function CorrectionPage() {
       {Array.from({ length: correctionResult.originalTexts.length }).map(
         (item, index) => (
           <div key={index} className={styles.correction}>
+            {prompt.mode === "TRANSLATING" && (
+              <div>{correctionResult.koreanTexts[index]}</div>
+            )}
             <div>{correctionResult.originalTexts[index]}</div>
             <div
               dangerouslySetInnerHTML={{
                 __html: highlight(correctionResult.correctedTexts[index]),
               }}
             />
-            <div>{correctionResult.explanations[index]}</div>
+
+            {prompt.mode !== "COPYING" && (
+              <div>{correctionResult.explanations[index]}</div>
+            )}
           </div>
         )
       )}
       <h3>종합 평가</h3>
-      <div>{correctionResult.evaluation}</div>
+      {prompt.mode !== "COPYING" && <div>{correctionResult.evaluation}</div>}
       <div>{correctionResult.score}점 / 100점</div>
     </div>
   );

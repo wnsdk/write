@@ -7,10 +7,10 @@ COPY package*.json /app/package.json
 RUN npm install --force
 
 # API 키를 위한 ARG 선언
-ARG REACT_APP_OPENAI_API_KEY
+ARG VITE_OPENAI_API_KEY
 
 # 환경 변수 설정
-ENV REACT_APP_OPENAI_API_KEY=${REACT_APP_OPENAI_API_KEY}
+ENV VITE_OPENAI_API_KEY=${VITE_OPENAI_API_KEY}
 
 # 소스를 작업폴더로 복사하고 빌드
 COPY . /app

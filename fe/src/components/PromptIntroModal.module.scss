@@ -1,0 +1,126 @@
+@import "@/constants/variables.scss";
+
+.modalOverlay {
+  position: fixed;
+  top: 0;
+  left: 0;
+  right: 0;
+  bottom: 0;
+  background-color: rgba(0, 0, 0, 0.5);
+  display: flex;
+  justify-content: center;
+  align-items: center;
+  opacity: 0; // 초기 투명도
+  transition: opacity 0.3s ease;
+  visibility: hidden; // 모달이 보이지 않게 함
+
+  &.show {
+    visibility: visible; // 모달이 보이게 함
+    opacity: 1; // 완전 불투명
+  }
+}
+
+.modal {
+  background: white;
+  padding: 30px 25px;
+  border-radius: 8px;
+  box-shadow: 0 2px 10px rgba(0, 0, 0, 0.1);
+  position: relative;
+
+  width: 80%;
+  max-width: calc($container-width - 100px);
+  min-height: 60%;
+  max-height: 80%;
+
+  display: flex;
+
+  i {
+    position: absolute;
+    right: 20px;
+    top: 20px;
+    font-size: 1.5rem;
+    cursor: pointer;
+    transition: color 0.3s ease;
+  }
+
+  i:hover {
+    color: rgb(145, 145, 145);
+  }
+
+  .left {
+    display: flex;
+    flex-direction: column;
+    flex: 2.3;
+
+    .title {
+      font-size: 1.5rem;
+      font-weight: bolder;
+    }
+
+    .description {
+      // font-size: 1.2rem;
+      font-weight: bold;
+      margin-top: 10px;
+    }
+
+    .kr {
+      font-size: 0.8rem;
+      color: rgb(148, 148, 148);
+    }
+
+    .body {
+      margin-top: 20px;
+      padding-top: 20px;
+      border-top: 1px solid rgb(206, 206, 206);
+      line-height: 2;
+    }
+
+    .noBody {
+      margin-top: 20px;
+      border-top: 1px solid rgb(206, 206, 206);
+      flex: 1;
+      display: flex;
+      justify-content: center;
+      align-items: center;
+    }
+  }
+
+  .right {
+    min-width: 200px;
+    border-left: 1px solid rgb(206, 206, 206);
+    padding-left: 20px;
+    margin-left: 20px;
+    flex: 1;
+    display: flex;
+    flex-direction: column;
+
+    .mode {
+      font-weight: bolder;
+      font-size: 1.8rem;
+      margin-bottom: 8px;
+    }
+    .modeDescription {
+      width: 90%;
+      font-size: 0.9rem;
+      color: #5c5c5c;
+      margin-bottom: 30px;
+    }
+
+    .metaDataContainer {
+      flex: 1;
+
+      .metaData {
+        display: flex;
+        margin-bottom: 10px;
+
+        > div:first-child {
+          flex: 2.7;
+          font-weight: bold;
+        }
+        > div:last-child {
+          flex: 5;
+        }
+      }
+    }
+  }
+}

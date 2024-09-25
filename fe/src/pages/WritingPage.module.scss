@@ -1,0 +1,77 @@
+@import "@/constants/variables.scss";
+
+.container {
+  position: absolute;
+  left: 0;
+  top: 0;
+  width: 100vw;
+  height: 100vh;
+
+  display: flex;
+  flex-direction: column;
+  justify-content: center;
+  align-items: center;
+
+  transition: margin-left 0.3s ease;
+  margin-left: 0;
+
+  &.sidebarOpen {
+    margin-left: $sidebar-width;
+    width: calc(100vw - $sidebar-width);
+  }
+  .subContainer {
+    display: flex;
+    flex-direction: column;
+    justify-content: center;
+    align-items: center;
+
+    width: 80%;
+    max-width: $container-width;
+    height: 100%;
+
+    .menus {
+      width: 100%;
+      display: flex;
+      align-items: flex-end;
+      margin-bottom: 10px;
+
+      .metaData {
+        color: white;
+        flex: 8;
+
+        .title {
+          font-weight: bolder;
+          font-size: 2rem;
+          margin-bottom: 8px;
+
+          span {
+            font-size: 1rem;
+            margin-left: 20px;
+            font-weight: 550;
+            color: rgb(255, 255, 255);
+          }
+        }
+        .explanation {
+          font-size: 0.8rem;
+        }
+      }
+
+      .buttons {
+        display: flex;
+        justify-content: center;
+        align-items: center;
+        gap: 10px;
+        flex: 2;
+        i {
+          font-size: 2rem;
+          cursor: pointer;
+          color: rgb(255, 255, 255);
+          transition: color 0.3s ease;
+        }
+        i:hover {
+          color: rgb(67, 67, 67);
+        }
+      }
+    }
+  }
+}

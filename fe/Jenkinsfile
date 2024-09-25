@@ -13,12 +13,14 @@ pipeline{
         stage('Deploy Docker'){
             steps{
                 script{
-                    sh "ls"
-                    sh "docker-compose -f docker-compose.yml pull"
-                    sh "COMPOSE_DOCKER_CLI_BUILD=1 DOCKER_BUILDKIT=1"
-                    sh "docker-compose -f docker-compose.yml build --no-cache"
-                    // sh "docker-compose run --rm frontend npm run build -- --mode production"
-                    sh "docker-compose -f docker-compose.yml up -d --remove-orphans"
+                    withCredentials([string(credentialsId: 'openai-api-key', variable: 'OPENAI_API_KEY')]) {
+                        sh "ls"
+                        sh "docker-compose -f docker-compose.yml pull"
+                        sh "COMPOSE_DOCKER_CLI_BUILD=1 DOCKER_BUILDKIT=1"
+                        sh "docker-compose -f docker-compose.yml build --no-cache --build-arg VITE_OPENAI_API_KEY=${OPENAI_API_KEY}"
+                        // sh "docker-compose run --rm frontend npm run build -- --mode production"
+                        sh "docker-compose -f docker-compose.yml up -d --remove-orphans"
+                    }
                 }
             }
         }

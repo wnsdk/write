@@ -6,6 +6,12 @@ COPY package*.json /app/package.json
 
 RUN npm install --force
 
+# API 키를 위한 ARG 선언
+ARG VITE_OPENAI_API_KEY
+
+# 환경 변수 설정
+ENV VITE_OPENAI_API_KEY=${VITE_OPENAI_API_KEY}
+
 # 소스를 작업폴더로 복사하고 빌드
 COPY . /app
 RUN npm run build -- --mode production

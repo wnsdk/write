@@ -1,0 +1,13 @@
+@import '@/constants/variables.scss';
+
+.button {
+    background: $gradient;
+    border: none;
+    color: white;
+    font-weight: bolder;
+    transition: background 0.3s ease;
+}
+
+.button:hover {
+    background: #5c5c5c;
+}

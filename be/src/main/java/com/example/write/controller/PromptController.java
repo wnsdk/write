@@ -1,5 +1,7 @@
 package com.example.write.controller;
 
+import com.example.write.domain.dto.request.PromptReqDto;
+import com.example.write.domain.dto.response.PromptResDto;
 import com.example.write.domain.entity.Prompt;
 import com.example.write.domain.enums.Mode;
 import com.example.write.repository.PromptRepository;
@@ -12,10 +14,7 @@ import org.springframework.data.domain.Page;
 import org.springframework.data.domain.Pageable;
 import org.springframework.http.HttpStatus;
 import org.springframework.http.ResponseEntity;
-import org.springframework.web.bind.annotation.GetMapping;
-import org.springframework.web.bind.annotation.PathVariable;
-import org.springframework.web.bind.annotation.RequestMapping;
-import org.springframework.web.bind.annotation.RestController;
+import org.springframework.web.bind.annotation.*;
 
 import java.util.List;
 
@@ -30,32 +29,29 @@ public class PromptController {
     // Pageable: 요청 URL의 쿼리 파라미터에서 페이지 정보(예: ?page=0&size=10)를 자동으로 추출해줌.
     @Operation(summary = "글감 목록 불러오기", description = "글감 목록을 불러옵니다.")
     @Parameter(name = "pageable", description = "?page=0&size=10")
-    @GetMapping("/list/{mode}")
-    public ResponseEntity<Page<Prompt>> getPrompts(@PathVariable String mode, Pageable pageable) {
-//        Mode promptMode;
-//        switch (mode.toUpperCase()) {
-//            case "WRITING":
-//                promptMode = Mode.WRITING;
-//                break;
-//            case "COPYING":
-//                promptMode = Mode.COPYING;
-//                break;
-//            case "TRANSLATING":
-//                promptMode = Mode.TRANSLATING;
-//                break;
-//            default:
-//                return ResponseEntity.badRequest().build(); // 잘못된 모드에 대한 처리
-//        }
-
-        Page<Prompt> prompts = promptService.findByMode(pageable, Mode.valueOf(mode.toUpperCase()));
-        return ResponseEntity.ok(prompts);
+    @GetMapping("/prompts")
+    public ResponseEntity<Page<PromptResDto>> getPrompts(@RequestParam(required = false) List<String> mode,
+                                                         @RequestParam(required = false) List<String> difficulty,
+                                                         @RequestParam(required = false) List<String> category,
+                                                         @RequestParam(required = false) String writer,
+                                                         @RequestParam(required = false) String query,
+                                                         Pageable pageable) {
+        Page<PromptResDto> promptResDtos = promptService.findPrompts(mode, difficulty, category, writer, query, pageable);
+        return ResponseEntity.ok(promptResDtos);
     }
 
     @Operation(summary = "글감 불러오기", description = "글감을 불러옵니다.")
     @GetMapping("/{id}")
-    public ResponseEntity<Prompt> getPrompt(@PathVariable Long id) {
-        Prompt prompt = promptService.findById(id);
+    public ResponseEntity<PromptResDto> getPrompt(@PathVariable Long id) {
+        PromptResDto promptResDtos = promptService.findById(id);
 
-        return ResponseEntity.ok(prompt);
+        return ResponseEntity.ok(promptResDtos);
+    }
+
+    @Operation(summary = "여러 글감 등록하기", description = "여러 개의 글감을 한꺼번에 등록합니다.")
+    @PostMapping("/prompts")
+    public ResponseEntity<List<PromptResDto>> createPrompts(@RequestBody List<PromptReqDto> promptReqDtos) {
+        List<PromptResDto> createdPrompts = promptService.saveAll(promptReqDtos);
+        return ResponseEntity.status(HttpStatus.CREATED).body(createdPrompts);
     }
 }

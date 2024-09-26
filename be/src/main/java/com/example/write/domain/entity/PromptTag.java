@@ -2,7 +2,13 @@ package com.example.write.domain.entity;
 
 import com.example.write.domain.BaseTimeEntity;
 import jakarta.persistence.*;
+import lombok.*;
 
+@Getter
+@ToString
+@NoArgsConstructor(access = AccessLevel.PROTECTED)
+@AllArgsConstructor(access = AccessLevel.PROTECTED)
+@Builder
 @Entity
 @Table(name = "prompt_tag")
 public class PromptTag extends BaseTimeEntity {

@@ -8,6 +8,7 @@ import jakarta.persistence.*;
 import lombok.*;
 
 import java.util.HashSet;
+import java.util.List;
 import java.util.Set;
 
 @Getter
@@ -56,6 +57,6 @@ public class Prompt extends BaseTimeEntity {
     @Column(name = "body", columnDefinition = "TEXT")
     private String body;
 
-    @OneToMany(mappedBy = "prompt")
-    private Set<PromptTag> promptTags = new HashSet<>();
+    @OneToMany(mappedBy = "prompt", cascade = CascadeType.ALL, orphanRemoval = true)
+    private List<PromptTag> promptTags;
 }

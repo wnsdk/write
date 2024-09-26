@@ -42,7 +42,7 @@ public class SecurityConfig {
 
         http
                 .authorizeHttpRequests((authorize) -> authorize
-                                .requestMatchers("/test/**", "/swagger-ui/**", "/v3/api-docs/**", "/h2-console/**", "/prompt/**").permitAll()
+                                .requestMatchers("/test/**", "/v3/swagger-ui/**", "/v3/api-docs/**", "/h2-console/**", "/prompt/**").permitAll()
 //                                .requestMatchers("/test/**", "/login/**", "/api/login/**", "/api/oauth2/authorization/**").permitAll()
 //                        .requestMatchers("/test/guest", "/test/login/**", "/oauth2/authorization/**").permitAll()
 //                        .requestMatchers("/test/admin").hasAuthority("ADMIN")

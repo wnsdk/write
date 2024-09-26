@@ -252,7 +252,7 @@
     "tags": ["모험", "코미디"]
   },
   {
-    "category": "Editorial",
+    "category": "EDITORIAL",
     "mode": "WRITING",
     "difficulty": "BEGINNER",
     "writer": null,
@@ -264,7 +264,7 @@
     "tags": ["미디어", "사회"]
   },
   {
-    "category": "Editorial",
+    "category": "EDITORIAL",
     "mode": "COPYING",
     "difficulty": "BEGINNER",
     "writer": "AI",
@@ -276,7 +276,7 @@
     "tags": ["커뮤니티", "사회적연대"]
   },
   {
-    "category": "Editorial",
+    "category": "EDITORIAL",
     "mode": "TRANSLATING",
     "difficulty": "INTERMEDIATE",
     "writer": "AI",

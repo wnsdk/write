@@ -1,26 +1,39 @@
-@import '@/constants/variables.scss';
+@import "@/constants/variables.scss";
 
 .sidebar {
-    width: $sidebar-width;
-    background-color: #fff;
-    position: fixed;
-    top: 0;
-    left: 0;
-    height: 100%;
-    z-index: 1000;
-    box-shadow: 2px 2px 5px rgba(0, 0, 0, 0.3);
+  width: $sidebar-width;
+  background-color: #e9e9e9;
+  position: fixed;
+  top: 0;
+  left: 0;
+  height: 100%;
+  z-index: 1000;
+  box-shadow: 2px 2px 5px rgba(0, 0, 0, 0.3);
 
-    .toggle {
-        width: 25px;
-        height: 37px;
-        display: flex;
-        justify-content: center;
-        align-items: center;
-        background-color: white;
-        color: #333;
-        transform: translateX($sidebar-width) translateY(10px);
-        border-radius: 0 5px 5px 0;
-        box-shadow: 2px 2px 5px rgba(0, 0, 0, 0.3);
-        cursor: pointer;
-    }
+  display: flex;
+  flex-direction: column;
+  justify-content: center;
+  align-items: center;
+
+  p {
+    width: 95%;
+    font-size: 0.9rem;
+  }
+
+  .toggle {
+    position: fixed;
+    left: 0;
+    top: 0;
+    width: 25px;
+    height: 37px;
+    display: flex;
+    justify-content: center;
+    align-items: center;
+    background-color: white;
+    color: #333;
+    transform: translateX($sidebar-width) translateY(10px);
+    border-radius: 0 5px 5px 0;
+    box-shadow: 2px 2px 5px rgba(0, 0, 0, 0.3);
+    cursor: pointer;
+  }
 }

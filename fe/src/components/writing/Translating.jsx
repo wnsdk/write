@@ -1,5 +1,5 @@
 import styles from "./Copying.module.scss";
-import InputTextArea from "@/components/InputTextArea";
+import InputTextArea from "@/components/input/InputTextArea";
 
 export default function Translating({ value, onChange, prompt }) {
   return (

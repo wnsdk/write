@@ -1,0 +1,39 @@
+.pagination {
+  display: flex;
+  justify-content: center;
+  align-items: center;
+  margin: 20px 0;
+
+  .pageNumber {
+    margin: 0 5px;
+    padding: 10px;
+    background-color: #f0f0f0;
+    border: none;
+    cursor: pointer;
+    transition: background-color 0.3s ease;
+  }
+
+  .active {
+    background-color: #007bff;
+    color: white;
+  }
+
+  .arrow {
+    padding: 10px;
+    margin: 0 10px;
+    background-color: #e0e0e0;
+    border: none;
+    cursor: pointer;
+    transition: background-color 0.3s ease;
+
+    &:disabled {
+      cursor: not-allowed;
+      background-color: #ccc;
+    }
+  }
+
+  .pageNumber:hover {
+    background-color: #007bff;
+    color: white;
+  }
+}

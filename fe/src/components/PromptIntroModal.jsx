@@ -1,7 +1,7 @@
 import styles from "./PromptIntroModal.module.scss";
 import { useNavigate } from "react-router-dom";
 import { categories, difficulties, modes } from "@/constants/constants";
-import Button from "@/components/Button";
+import Button from "@/components/input/Button";
 
 export default function PromptIntroModal({ isOpen, onClose, prompt }) {
   const navigate = useNavigate();

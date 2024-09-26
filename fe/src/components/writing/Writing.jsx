@@ -1,5 +1,5 @@
 import styles from "./Writing.module.scss";
-import InputTextArea from "@/components/InputTextArea";
+import InputTextArea from "@/components/input/InputTextArea";
 
 export default function Writing({ value, onChange }) {
   return (

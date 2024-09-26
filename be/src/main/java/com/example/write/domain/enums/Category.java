@@ -8,7 +8,7 @@ public enum Category {
     LETTER("편지"),
     DIARY("일기"),
     PLAY("희곡"),
-    Editorial("논설문");
+    EDITORIAL("논설문");
 
     private final String value;
 

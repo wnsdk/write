@@ -4,6 +4,7 @@ import com.example.write.domain.dto.request.PromptReqDto;
 import com.example.write.domain.dto.response.PromptResDto;
 import com.example.write.domain.entity.Prompt;
 import com.example.write.domain.entity.PromptTag;
+import com.example.write.domain.entity.PromptTagId;
 import com.example.write.domain.entity.Tag;
 import com.example.write.domain.enums.Category;
 import com.example.write.domain.enums.Difficulty;
@@ -75,6 +76,7 @@ public class PromptServiceImpl implements PromptService {
                     .description(promptReqDto.getDescription())
                     .descriptionKr(promptReqDto.getDescriptionKr())
                     .body(promptReqDto.getBody())
+                    .usageCount(0)
                     .build();
 
             PromptResDto promptResDto = convertToDto(promptReqDto);
@@ -86,7 +88,6 @@ public class PromptServiceImpl implements PromptService {
             if (promptReqDto.getTags() != null) {
                 for (String tagName : promptReqDto.getTags()) {
                     // 태그가 존재하는지 확인
-                    System.out.println(tagName);
                     Tag tag = tagRepository.findByName(tagName);
                     if (tag == null) {
                         tag = Tag.builder()
@@ -94,9 +95,16 @@ public class PromptServiceImpl implements PromptService {
                                 .build();
                         tagRepository.save(tag);
                     }
+
+                    PromptTagId promptTagId = PromptTagId.builder()
+                            .promptId(savedPrompt.getPromptId())
+                            .tagId(tag.getTagId())
+                            .build();
+
                     PromptTag promptTag = PromptTag.builder()
                             .prompt(savedPrompt)
                             .tag(tag)
+                            .PromptTagId(promptTagId)
                             .build();
                     promptTagRepository.save(promptTag);
 
@@ -172,6 +180,7 @@ public class PromptServiceImpl implements PromptService {
                             .description(prompt.getDescription())
                             .descriptionKr(prompt.getDescriptionKr())
                             .body(prompt.getBody())
+                            .usageCount(prompt.getUsageCount())
                             .tags(tagNames)
                             .build();
                 })
@@ -206,6 +215,7 @@ public class PromptServiceImpl implements PromptService {
                 .description(prompt.getDescription())
                 .descriptionKr(prompt.getDescriptionKr())
                 .body(prompt.getBody())
+                .usageCount(prompt.getUsageCount())
                 .tags(tagNames)
                 .build();
     }

@@ -4,6 +4,7 @@ import com.example.write.domain.BaseTimeEntity;
 import com.example.write.domain.enums.Category;
 import com.example.write.domain.enums.Difficulty;
 import com.example.write.domain.enums.Mode;
+import com.fasterxml.jackson.annotation.JsonManagedReference;
 import jakarta.persistence.*;
 import lombok.*;
 
@@ -57,6 +58,14 @@ public class Prompt extends BaseTimeEntity {
     @Column(name = "body", columnDefinition = "TEXT")
     private String body;
 
+    @Column(name = "usage_count", nullable = false)
+    private Integer usageCount;
+
     @OneToMany(mappedBy = "prompt", cascade = CascadeType.ALL, orphanRemoval = true)
+    @JsonManagedReference
     private List<PromptTag> promptTags;
+
+    public void updateUsageCount(int usageCount) {
+        this.usageCount = usageCount;
+    }
 }

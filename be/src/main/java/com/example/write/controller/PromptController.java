@@ -11,7 +11,9 @@ import io.swagger.v3.oas.annotations.Parameter;
 import io.swagger.v3.oas.annotations.tags.Tag;
 import lombok.RequiredArgsConstructor;
 import org.springframework.data.domain.Page;
+import org.springframework.data.domain.PageRequest;
 import org.springframework.data.domain.Pageable;
+import org.springframework.data.domain.Sort;
 import org.springframework.http.HttpStatus;
 import org.springframework.http.ResponseEntity;
 import org.springframework.web.bind.annotation.*;
@@ -35,8 +37,10 @@ public class PromptController {
                                                          @RequestParam(required = false) List<String> category,
                                                          @RequestParam(required = false) String writer,
                                                          @RequestParam(required = false) String query,
+                                                         @RequestParam(required = false, defaultValue = "latest") String sort,
                                                          Pageable pageable) {
-        Page<PromptResDto> promptResDtos = promptService.findPrompts(mode, difficulty, category, writer, query, pageable);
+        Pageable sortedPageable = getSortedPageable(pageable, sort);
+        Page<PromptResDto> promptResDtos = promptService.findPrompts(mode, difficulty, category, writer, query, sortedPageable);
         return ResponseEntity.ok(promptResDtos);
     }
 
@@ -53,5 +57,24 @@ public class PromptController {
     public ResponseEntity<List<PromptResDto>> createPrompts(@RequestBody List<PromptReqDto> promptReqDtos) {
         List<PromptResDto> createdPrompts = promptService.saveAll(promptReqDtos);
         return ResponseEntity.status(HttpStatus.CREATED).body(createdPrompts);
+    }
+
+    private Pageable getSortedPageable(Pageable pageable, String sort) {
+        Sort sortOrder;
+
+        switch (sort.toLowerCase()) {
+            case "oldest":  // 오래된 순
+                sortOrder = Sort.by(Sort.Direction.ASC, "createdAt");
+                break;
+            case "popular":  // 인기순
+                sortOrder = Sort.by(Sort.Direction.DESC, "usageCount");  // 조회수나 인기 필드로 정렬
+                break;
+            case "latest":  // 최신순 (기본값)
+            default:
+                sortOrder = Sort.by(Sort.Direction.DESC, "createdAt");
+                break;
+        }
+
+        return PageRequest.of(pageable.getPageNumber(), pageable.getPageSize(), sortOrder);
     }
 }

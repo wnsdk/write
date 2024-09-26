@@ -12,15 +12,16 @@ import lombok.*;
 @Entity
 @Table(name = "prompt_tag")
 public class PromptTag extends BaseTimeEntity {
-    @Id
-    @GeneratedValue(strategy = GenerationType.IDENTITY)
-    private Long id;
+    @EmbeddedId
+    private PromptTagId PromptTagId;
 
     @ManyToOne
+    @MapsId("promptId")
     @JoinColumn(name = "promptId", referencedColumnName = "prompt_id", nullable = false)
     private Prompt prompt;
 
     @ManyToOne
+    @MapsId("tagId")
     @JoinColumn(name = "tagId", referencedColumnName = "tag_id", nullable = false)
     private Tag tag;
 }

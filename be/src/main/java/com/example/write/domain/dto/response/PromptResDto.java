@@ -25,7 +25,7 @@ public class PromptResDto {
     private String description; // 설명
     private String descriptionKr; // 설명(한글)
     private String body; // 본문
+    private Integer usageCount;
 
     private List<String> tags; // 연결할 태그 ID 리스트
-
 }

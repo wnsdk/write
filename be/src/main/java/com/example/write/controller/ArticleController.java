@@ -2,6 +2,7 @@ package com.example.write.controller;
 
 import com.example.write.config.jwt.JwtProvider;
 import com.example.write.domain.dto.request.ArticleReqDto;
+import com.example.write.domain.dto.response.ArticleResDto;
 import com.example.write.domain.entity.Article;
 import com.example.write.service.ArticleService;
 import io.swagger.v3.oas.annotations.Operation;
@@ -48,12 +49,28 @@ public class ArticleController {
         return ResponseEntity.ok(article);
     }
 
-//    @GetMapping
-//    public ResponseEntity<List<Article>> getArticles(HttpServletRequest request) {
-//        String accessToken = jwtProvider.getToken(request);
-//        Long userId = Long.parseLong(jwtProvider.getSub(accessToken));
-//
-//        List<Article> articles = articleService.getArticles(userId);
-//        return ResponseEntity.ok(articles);
-//    }
+    @Operation(summary = "내가 쓴 글 불러오기", description = "userId를 이용해 글을 불러옵니다.")
+    @GetMapping
+    public ResponseEntity<List<ArticleResDto>> getArticle(HttpServletRequest request) {
+
+        String accessToken = jwtProvider.getToken(request);
+        Long userId = Long.parseLong(jwtProvider.getSub(accessToken));
+
+        List<ArticleResDto> articles = articleService.getArticles(userId);
+
+        return ResponseEntity.status(200).body(articles);
+    }
+
+    @Operation(summary = "ai 평가 저장하기", description = "ai의 평가를 저장합니다.")
+    @PostMapping("/evaluation")
+    public ResponseEntity<Article> evaluateArticle(@Parameter(description = "글 내용") @RequestBody ArticleReqDto articleReqDto, HttpServletRequest request) {
+
+        String accessToken = jwtProvider.getToken(request);
+        Long userId = Long.parseLong(jwtProvider.getSub(accessToken));
+
+        articleReqDto.setUserId(userId); // userId를 통해 User 객체 설정
+        Article savedArticle = articleService.evaluateArticle(articleReqDto);
+
+        return ResponseEntity.ok(savedArticle);
+    }
 }

@@ -4,8 +4,12 @@ import com.example.write.domain.BaseTimeEntity;
 import com.example.write.domain.enums.Provider;
 import com.example.write.domain.enums.Role;
 import com.example.write.domain.enums.Status;
+import com.fasterxml.jackson.annotation.JsonBackReference;
+import com.fasterxml.jackson.annotation.JsonManagedReference;
 import jakarta.persistence.*;
 import lombok.*;
+
+import java.util.List;
 
 @Getter
 @ToString
@@ -40,6 +44,10 @@ public class User extends BaseTimeEntity {
     @Column(name = "provider", nullable = false)
     @Enumerated(EnumType.STRING)
     private Provider provider;
+
+    @OneToMany(mappedBy = "user")
+    @JsonManagedReference   // user를 직렬화 할 때 articles는 직렬화되지 않는다.
+    private List<Article> articles;
 
     public void updateStatus(Status status) {
         this.status = status;

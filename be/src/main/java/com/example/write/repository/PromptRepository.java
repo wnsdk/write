@@ -12,8 +12,4 @@ import org.springframework.data.jpa.repository.Query;
 
 public interface PromptRepository extends JpaRepository<Prompt, Long>, JpaSpecificationExecutor<Prompt> {
     Page<Prompt> findByMode(Pageable pageable, Mode mode);
-
-//    @Query("SELECT new com.example.write.domain.dto.response.PromptResDto(p.promptId, p.category, p.mode, p.difficulty, p.writer, p.title, p.titleKr, p.description, p.descriptionKr, p.body) " +
-//            "FROM Prompt p")
-//    Page<PromptResDto> findAllPrompts(Specification<Prompt> spec, Pageable pageable);
 }

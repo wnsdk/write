@@ -14,7 +14,7 @@ spring:
       path: /h2-console
   jpa:
     hibernate:
-      ddl-auto: update # create, create-drop, update, validate
+      ddl-auto: create # create, create-drop, update, validate
     show-sql: true
     database-platform: org.hibernate.dialect.H2Dialect
     properties:

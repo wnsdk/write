@@ -164,7 +164,7 @@
     "titleKr": "과거로부터의 편지",
     "description": "Discovering a letter that reveals family secrets.",
     "descriptionKr": "가족의 비밀을 드러내는 편지를 발견하다.",
-    "body": "As she rummaged through the dusty attic, she stumbled upon an old, yellowed letter. The handwriting was elegant, but the ink had faded over time. Curiosity consumed her as she carefully unfolded the fragile paper. The letter spoke of family secrets long buried, tales of love and loss that shaped her ancestors. Each word painted vivid pictures in her mind, revealing connections she never knew existed. This discovery ignited a spark of curiosity about her heritage. She felt an overwhelming need to learn more, to connect with the past. The letter became a treasure, a key to understanding her family's legacy. It was a reminder that every family has stories waiting to be uncovered.",
+    "body": "As she rummaged through the dusty attic, she stumbled upon an old, yellowed letter. The handwriting was elegant, but the ink had faded over time. Curiosity consumed her as she carefully unfolded the fragile paper. The letter spoke of family secrets long buried, tales of love and loss that shaped her ancestors. Each word painted vivid pictures in her mind, revealing connections she never knew existed. This discovery ignited a spark of curiosity about her heritage. She felt an overwhelming need to learn more, to connect with the past. The letter became a treasure, a key to understanding her family’s legacy. It was a reminder that every family has stories waiting to be uncovered.",
     "tags": ["가족", "비밀", "유산"]
   },
   {
@@ -206,7 +206,7 @@
   {
     "category": "DIARY",
     "mode": "TRANSLATING",
-    "difficulty": "INTERMEDIATE",
+    "difficulty": "BEGINNER",
     "writer": "AI",
     "title": "A Day to Remember",
     "titleKr": "기억에 남는 하루",
@@ -362,7 +362,7 @@
   {
     "category": "PLAY",
     "mode": "WRITING",
-    "difficulty": "INTERMEDIATE",
+    "difficulty": "BEGINNER",
     "writer": null,
     "title": "The Last Train Home",
     "titleKr": "마지막 기차",

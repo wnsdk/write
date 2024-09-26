@@ -4,7 +4,6 @@ import styles from "./CorrectionPage.module.scss";
 export default function CorrectionPage() {
   const location = useLocation();
   const { correctionResult, prompt } = location.state || {};
-  console.log(correctionResult);
 
   const highlight = (originalText) => {
     return originalText.replace(

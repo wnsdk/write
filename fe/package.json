@@ -17,6 +17,7 @@
     "buffer": "^6.0.3",
     "crypto-js": "^4.2.0",
     "framer-motion": "^11.5.6",
+    "lodash": "^4.17.21",
     "openai": "^4.63.0",
     "react": "^18.3.1",
     "react-dom": "^18.3.1",

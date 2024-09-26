@@ -14,7 +14,6 @@ export default function WritingPage() {
     const navigate = useNavigate();
     const location = useLocation();
     const { prompt } = location.state || {};
-    console.log(prompt);
 
     const [isOpen, setIsOpen] = useState(true);
     const [article, setArticle] = useState(null);

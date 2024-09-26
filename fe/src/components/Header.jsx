@@ -68,7 +68,6 @@ export default function Header() {
     // 로그인 상태에 따라 조건부 렌더링
     return (
         <div className={styles.container}>
-            <GradientBox gradientHeight={gradientHeight} />
             <div className={`${styles.header} ${headerClass}`}>
                 <div className={styles.headerContent}>
                     {/* <img className={styles.logo} src="/icon_circle.png" alt="logo" /> */}
@@ -107,7 +106,22 @@ export default function Header() {
             </div>
 
             <div className={styles.outlet}>
-                <Outlet />
+                <div
+                    className={
+                        gradientHeight == 0
+                            ? `${styles.gradientBox} ${styles.height0}`
+                            : gradientHeight == 1
+                            ? `${styles.gradientBox} ${styles.height1}`
+                            : gradientHeight == 2
+                            ? `${styles.gradientBox} ${styles.height2}`
+                            : `${styles.gradientBox} ${styles.height3}`
+                    }
+                >
+                    <GradientBox gradientHeight={gradientHeight} />
+                </div>
+                <div className={styles.outletBox}>
+                    <Outlet />
+                </div>
             </div>
         </div>
     );

@@ -30,6 +30,3 @@ spring:
     redis:
       host: localhost
       port: 6379
-
-#redirect:
-#  uri: /login/oauth2/code/*

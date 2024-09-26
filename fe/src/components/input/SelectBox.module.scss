@@ -1,0 +1,36 @@
+.selectBoxContainer {
+  position: relative;
+  display: inline-block;
+  width: 200px;
+}
+
+.selectBox {
+  width: 100%;
+  padding: 10px;
+  border: 2px solid #007bff;
+  border-radius: 4px;
+  background-color: #f9f9f9;
+  font-size: 16px;
+  color: #333;
+  appearance: none; /* 기본 드롭다운 화살표 숨기기 */
+  cursor: pointer;
+  transition: all 0.3s ease;
+
+  &:focus {
+    outline: none;
+    border-color: #0056b3;
+    box-shadow: 0 0 5px rgba(0, 123, 255, 0.5);
+  }
+
+  &:hover {
+    background-color: #f1f1f1;
+  }
+}
+
+.selectBoxContainer::after {
+  content: "▼";
+  font-size: 12px;
+  position: absolute;
+  right: 10px;
+  top: 50%;
+}

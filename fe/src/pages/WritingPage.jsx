@@ -43,18 +43,20 @@ export default function WritingPage() {
     const articleData = { body: text, promptId: prompt.promptId };
 
     // 첫 저장이 아니라면
-    if (article != null) {
-      articleData.articleId = article.articleId;
-    }
+    // if (article != null) {
+    //   articleData.articleId = article.articleId;
+    // }
 
-    authAxios.post("/article/save", articleData);
+    authAxios
+      .post("/article/save", articleData)
+      .then((response) => setArticle(response.data));
   };
 
   const submitArticle = async () => {
     const confirmSubmit = window.confirm("정말로 제출하시겠습니까?");
     if (confirmSubmit) {
       setLoading(true);
-      saveArticle();
+      await saveArticle();
       try {
         let structuredResponse;
         if (prompt.mode === "WRITING") {
@@ -73,7 +75,10 @@ export default function WritingPage() {
         }
 
         navigate("/correction", {
-          state: { correctionResult: correctionResult, prompt: prompt },
+          state: {
+            correctionResult: correctionResult,
+            prompt: prompt,
+          },
         });
       } catch (error) {
         console.error("Error:", error);
@@ -86,7 +91,7 @@ export default function WritingPage() {
   const exit = () => {
     const confirmExit = window.confirm("정말로 나가시겠습니까?");
     if (confirmExit) {
-      navigate("/");
+      navigate("/history");
     }
   };
 

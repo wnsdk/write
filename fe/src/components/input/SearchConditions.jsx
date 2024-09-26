@@ -1,6 +1,7 @@
 import styles from "./SearchConditions.module.scss";
 import CheckBox from "@/components/input/CheckBox";
 import { categories, difficulties } from "@/constants/constants";
+import SelectBox from "@/components/input/SelectBox";
 
 const SearchConditions = ({
   mode,
@@ -12,12 +13,21 @@ const SearchConditions = ({
   query,
   setQuery,
   handleSearch,
+  handleSortChange,
+  isKr,
+  handleIsKr,
 }) => {
-  const handleModeChange = (value) => {
-    setMode((prev) =>
-      prev.includes(value) ? prev.filter((m) => m !== value) : [...prev, value]
-    );
-  };
+  const sortOptions = [
+    { value: "latest", label: "최신순" },
+    { value: "oldest", label: "오래된순" },
+    { value: "popular", label: "인기순" },
+  ];
+
+  // const handleModeChange = (value) => {
+  //   setMode((prev) =>
+  //     prev.includes(value) ? prev.filter((m) => m !== value) : [...prev, value]
+  //   );
+  // };
 
   const handleDifficultyChange = (value) => {
     setDifficulty((prev) =>
@@ -104,7 +114,12 @@ const SearchConditions = ({
             검색
           </button>
         </div>
+        <SelectBox options={sortOptions} onChange={handleSortChange} />
       </div>
+      <label>
+        <input type="checkbox" checked={isKr} onChange={handleIsKr} />
+        {isKr ? "영어로 보기" : "한글로 보기"}
+      </label>
     </div>
   );
 };

@@ -4,6 +4,9 @@ import { useLoginStore } from "../store/loginStore";
 export const authAxios = axios.create({
   baseURL: import.meta.env.VITE_API_BASE_URL,
   withCredentials: true,
+  headers: {
+    "Content-Type": "application/json; charset=UTF-8",
+  },
 });
 
 // 요청을 보내기 전, 인증 정보를 담아서 서버에 전송

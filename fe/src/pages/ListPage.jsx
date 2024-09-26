@@ -21,6 +21,8 @@ export default function ListPage() {
   const [query, setQuery] = useState("");
   const [results, setResults] = useState({ content: [] });
   const [loading, setLoading] = useState(false);
+  const [isKr, setIsKr] = useState(false);
+  const [sortOption, setSortOption] = useState("latest");
 
   const [currentPage, setCurrentPage] = useState(1); // 현재 페이지를 저장할 상태
   const [totalPages, setTotalPages] = useState(1); // 전체 페이지 수를 저장할 상태
@@ -56,6 +58,7 @@ export default function ListPage() {
         query ? `query=${query}` : "",
         `page=${currentPage - 1}`,
         `size=6`,
+        `sort=${sortOption}`,
       ]
         .filter(Boolean)
         .join("&"); // 빈 문자열을 필터링하여 제거
@@ -71,12 +74,16 @@ export default function ListPage() {
     }
   };
 
+  const handleIsKr = () => {
+    setIsKr((prevState) => !prevState);
+  };
+
   const debouncedFetchResults = debounce(fetchPrompts, 300);
 
   useEffect(() => {
     debouncedFetchResults();
     return debouncedFetchResults.cancel;
-  }, [difficulty, category, writer, query, currentPage]);
+  }, [difficulty, category, writer, query, currentPage, sortOption]);
 
   useEffect(() => {
     setMode(location.state?.mode || ""); // location의 state에 따라 mode 업데이트
@@ -105,6 +112,10 @@ export default function ListPage() {
     setIsModalOpen(false);
   };
 
+  const handleSortChange = (value) => {
+    setSortOption(value);
+  };
+
   return (
     <>
       {/* {mode === "writing" && <span>작문</span>}
@@ -127,6 +138,9 @@ export default function ListPage() {
           query={query}
           setQuery={setQuery}
           handleSearch={fetchPrompts}
+          handleSortChange={handleSortChange}
+          isKr={isKr}
+          handleIsKr={handleIsKr}
         />
         {loading ? (
           <div className={styles.loadingOverlay}>
@@ -138,6 +152,7 @@ export default function ListPage() {
               <PromptBox
                 prompt={item}
                 key={index}
+                isKr={isKr}
                 onClick={() => {
                   openModal();
                   setSelectedPrompt(item);

@@ -10,6 +10,7 @@ import LoginPage from "@/pages/LoginPage";
 import NotFoundPage from "@/pages/NotFoundPage";
 import ServiceIntroduction from "@/pages/ServiceIntroduction";
 import MyPage from "@/pages/MyPage";
+import HistoryPage from "@/pages/HistoryPage";
 
 function App() {
   return (
@@ -24,6 +25,7 @@ function App() {
           />
           <Route path="/oauth/redirect" element={<MainPage />} />
           <Route path="/my" element={<MyPage />} />
+          <Route path="/history" element={<HistoryPage />} />
           <Route path="/list" element={<ListPage />} />
           <Route path="/correction" element={<CorrectionPage />} />
 

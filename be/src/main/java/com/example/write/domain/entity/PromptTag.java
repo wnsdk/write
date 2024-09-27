@@ -1,6 +1,7 @@
 package com.example.write.domain.entity;
 
 import com.example.write.domain.BaseTimeEntity;
+import com.fasterxml.jackson.annotation.JsonBackReference;
 import jakarta.persistence.*;
 import lombok.*;
 
@@ -18,10 +19,12 @@ public class PromptTag extends BaseTimeEntity {
     @ManyToOne
     @MapsId("promptId")
     @JoinColumn(name = "promptId", referencedColumnName = "prompt_id", nullable = false)
+    @JsonBackReference
     private Prompt prompt;
 
     @ManyToOne
     @MapsId("tagId")
     @JoinColumn(name = "tagId", referencedColumnName = "tag_id", nullable = false)
+    @JsonBackReference
     private Tag tag;
 }

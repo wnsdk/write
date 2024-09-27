@@ -13,7 +13,6 @@ import java.util.List;
 import java.util.Set;
 
 @Getter
-@ToString
 @NoArgsConstructor(access = AccessLevel.PROTECTED)
 @AllArgsConstructor(access = AccessLevel.PROTECTED)
 @Builder
@@ -53,6 +52,23 @@ public class Prompt extends BaseTimeEntity {
     @Lob
     @Column(name = "description_kr")
     private String descriptionKr;
+
+    @Override
+    public String toString() {
+        return "Prompt{" +
+                "promptId=" + promptId +
+                ", category=" + category +
+                ", mode=" + mode +
+                ", difficulty=" + difficulty +
+                ", writer='" + writer + '\'' +
+                ", title='" + title + '\'' +
+                ", titleKr='" + titleKr + '\'' +
+                ", description='" + description + '\'' +
+                ", descriptionKr='" + descriptionKr + '\'' +
+                ", body='" + body + '\'' +
+                ", usageCount=" + usageCount +
+                '}';
+    }
 
     @Lob
     @Column(name = "body", columnDefinition = "TEXT")

@@ -7,7 +7,6 @@ import jakarta.persistence.*;
 import lombok.*;
 
 @Getter
-@ToString
 @NoArgsConstructor(access = AccessLevel.PROTECTED)
 @AllArgsConstructor(access = AccessLevel.PROTECTED)
 @Builder
@@ -28,4 +27,11 @@ public class PromptTag extends BaseTimeEntity {
     @JoinColumn(name = "tagId", referencedColumnName = "tag_id", nullable = false)
     @JsonBackReference
     private Tag tag;
+
+    @Override
+    public String toString() {
+        return "PromptTag{" +
+                "PromptTagId=" + PromptTagId +
+                '}';
+    }
 }

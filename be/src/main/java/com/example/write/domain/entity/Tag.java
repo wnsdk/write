@@ -9,7 +9,6 @@ import java.util.HashSet;
 import java.util.Set;
 
 @Getter
-@ToString
 @NoArgsConstructor(access = AccessLevel.PROTECTED)
 @AllArgsConstructor(access = AccessLevel.PROTECTED)
 @Builder
@@ -27,4 +26,12 @@ public class Tag extends BaseTimeEntity {
     @OneToMany(mappedBy = "tag")
     @JsonManagedReference
     private Set<PromptTag> promptTags = new HashSet<>();
+
+    @Override
+    public String toString() {
+        return "Tag{" +
+                "tagId=" + tagId +
+                ", name='" + name + '\'' +
+                '}';
+    }
 }

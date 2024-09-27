@@ -9,7 +9,6 @@ import lombok.*;
 import java.time.LocalDateTime;
 
 @Getter
-@ToString
 @NoArgsConstructor(access = AccessLevel.PROTECTED)
 @AllArgsConstructor(access = AccessLevel.PROTECTED)
 @Builder
@@ -51,5 +50,16 @@ public class Article extends BaseTimeEntity {
         this.score = score;
         this.evaluation = evaluation;
         this.evaluatedAt = LocalDateTime.now();
+    }
+
+    @Override
+    public String toString() {
+        return "Article{" +
+                "articleId=" + articleId +
+                ", body='" + body + '\'' +
+                ", evaluatedAt=" + evaluatedAt +
+                ", score=" + score +
+                ", evaluation='" + evaluation + '\'' +
+                '}';
     }
 }

@@ -13,7 +13,6 @@ import lombok.*;
 import java.util.List;
 
 @Getter
-@ToString
 @NoArgsConstructor(access = AccessLevel.PROTECTED)
 @AllArgsConstructor(access = AccessLevel.PROTECTED)
 @Builder
@@ -57,5 +56,18 @@ public class User extends BaseTimeEntity {
     public void updateUser(String name, String profile) {
         this.name = name;
         this.profile = profile;
+    }
+
+    @Override
+    public String toString() {
+        return "User{" +
+                "userId=" + userId +
+                ", email='" + email + '\'' +
+                ", name='" + name + '\'' +
+                ", profile='" + profile + '\'' +
+                ", role=" + role +
+                ", status=" + status +
+                ", provider=" + provider +
+                '}';
     }
 }

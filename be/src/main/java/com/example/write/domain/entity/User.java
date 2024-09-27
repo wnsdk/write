@@ -5,6 +5,7 @@ import com.example.write.domain.enums.Provider;
 import com.example.write.domain.enums.Role;
 import com.example.write.domain.enums.Status;
 import com.fasterxml.jackson.annotation.JsonBackReference;
+import com.fasterxml.jackson.annotation.JsonIgnore;
 import com.fasterxml.jackson.annotation.JsonManagedReference;
 import jakarta.persistence.*;
 import lombok.*;
@@ -46,7 +47,7 @@ public class User extends BaseTimeEntity {
     private Provider provider;
 
     @OneToMany(mappedBy = "user")
-    @JsonManagedReference   // user를 직렬화 할 때 articles는 직렬화되지 않는다.
+    @JsonIgnore
     private List<Article> articles;
 
     public void updateStatus(Status status) {

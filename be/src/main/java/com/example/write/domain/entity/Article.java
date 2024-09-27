@@ -2,6 +2,7 @@ package com.example.write.domain.entity;
 
 import com.example.write.domain.BaseTimeEntity;
 import com.fasterxml.jackson.annotation.JsonBackReference;
+import com.fasterxml.jackson.annotation.JsonIgnore;
 import jakarta.persistence.*;
 import lombok.*;
 
@@ -23,7 +24,7 @@ public class Article extends BaseTimeEntity {
 
     @ManyToOne(fetch = FetchType.EAGER)
     @JoinColumn(name = "user_id", nullable = false)
-    @JsonBackReference  // article을 직렬화할 때는 user 정보가 직렬화된다.
+    @JsonIgnore
     private User user; // 작성한 유저
 
     @ManyToOne(fetch = FetchType.EAGER)

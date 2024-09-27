@@ -4,9 +4,10 @@ import org.springframework.http.HttpStatus;
 
 public enum ErrorMessage {
     CONTENT_NOT_EXIST(100, "콘텐츠가 존재하지 않습니다.", HttpStatus.NOT_FOUND),
-    EXIST_USER(201, "이미 가입한 유저입니다.", HttpStatus.BAD_REQUEST),
-    NOT_EXIST_USER(202, "존재하지 않는 유저입니다.", HttpStatus.BAD_REQUEST),
+    USER_EXIST(201, "이미 가입한 유저입니다.", HttpStatus.BAD_REQUEST),
+    USER_NOT_EXIST(202, "존재하지 않는 유저입니다.", HttpStatus.BAD_REQUEST),
     DELETED_USER(203, "탈퇴한 유저입니다.", HttpStatus.BAD_REQUEST),
+    INSUFFICIENT_REQUEST_DATA(300, "요청 데이터가 불충분합니다.", HttpStatus.BAD_REQUEST),
     REFRESH_TOKEN_EXPIRE(900, "refresh 토큰이 만료되었습니다.", HttpStatus.UNAUTHORIZED),
     REFRESH_TOKEN_NOT_MATCH(901, "refresh 토큰이 일치하지 않습니다.", HttpStatus.UNAUTHORIZED),
     ACCESS_TOKEN_EXPIRE(1000, "access 토큰이 만료되었습니다.", HttpStatus.UNAUTHORIZED),

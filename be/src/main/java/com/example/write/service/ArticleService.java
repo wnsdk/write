@@ -3,17 +3,18 @@ package com.example.write.service;
 import com.example.write.domain.dto.request.ArticleReqDto;
 import com.example.write.domain.dto.response.ArticleResDto;
 import com.example.write.domain.entity.Article;
+import org.springframework.data.domain.Page;
+import org.springframework.data.domain.Pageable;
 
 import java.util.List;
 
 public interface ArticleService {
+
     Article saveArticle(ArticleReqDto articleReqDto);
 
-    void deleteArticle(Long promptId, Long userId);
+    void deleteArticle(Long articleId);
 
-    Article getArticle(Long id, Long userId);
+    Article getArticleById(Long articleId, Long userId);
 
-    List<ArticleResDto> getArticles(Long userId);
-
-    Article evaluateArticle(ArticleReqDto articleReqDto);
+    Page<ArticleResDto> getArticlesByUser(Long userId, Long promptId, Boolean isEvaluated, Pageable pageable);
 }

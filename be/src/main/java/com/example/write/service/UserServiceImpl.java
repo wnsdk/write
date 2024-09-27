@@ -9,13 +9,9 @@ import com.example.write.exception.BaseException;
 import com.example.write.exception.ErrorMessage;
 import com.example.write.repository.UserRepository;
 import jakarta.annotation.PostConstruct;
-import jakarta.servlet.http.HttpServletRequest;
-import jakarta.servlet.http.HttpServletResponse;
 import lombok.RequiredArgsConstructor;
 import org.springframework.stereotype.Service;
 import org.springframework.transaction.annotation.Transactional;
-
-import java.util.Optional;
 
 @Service
 @RequiredArgsConstructor
@@ -41,7 +37,7 @@ public class UserServiceImpl implements UserService {
             }
             // 이미 가입한 유저
             else {
-                throw new BaseException(ErrorMessage.EXIST_USER);
+                throw new BaseException(ErrorMessage.USER_EXIST);
             }
         });
 
@@ -60,7 +56,7 @@ public class UserServiceImpl implements UserService {
     // 회원 탈퇴
     @Override
     public User deleteUser(String email) {
-        User user = userRepository.findByEmail(email).orElseThrow(() -> new BaseException(ErrorMessage.NOT_EXIST_USER));
+        User user = userRepository.findByEmail(email).orElseThrow(() -> new BaseException(ErrorMessage.USER_NOT_EXIST));
         user.updateStatus(Status.DELETED);
         return user;
     }
@@ -68,7 +64,7 @@ public class UserServiceImpl implements UserService {
     // 회원 수정
     @Override
     public User updateUser(String email, String name, String profile) {
-        User user = userRepository.findByEmail(email).orElseThrow(() -> new BaseException(ErrorMessage.NOT_EXIST_USER));
+        User user = userRepository.findByEmail(email).orElseThrow(() -> new BaseException(ErrorMessage.USER_NOT_EXIST));
         user.updateUser(name, profile);
         return user;
     }

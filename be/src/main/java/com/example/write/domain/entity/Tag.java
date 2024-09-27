@@ -1,6 +1,7 @@
 package com.example.write.domain.entity;
 
 import com.example.write.domain.BaseTimeEntity;
+import com.fasterxml.jackson.annotation.JsonManagedReference;
 import jakarta.persistence.*;
 import lombok.*;
 
@@ -24,5 +25,6 @@ public class Tag extends BaseTimeEntity {
     private String name;
 
     @OneToMany(mappedBy = "tag")
+    @JsonManagedReference
     private Set<PromptTag> promptTags = new HashSet<>();
 }

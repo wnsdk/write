@@ -19,7 +19,7 @@ spring:
     database-platform: org.hibernate.dialect.H2Dialect
     properties:
       hibernate:
-        format_sql: true
+        format_sql: false # false
   security:
     oauth2:
       client:

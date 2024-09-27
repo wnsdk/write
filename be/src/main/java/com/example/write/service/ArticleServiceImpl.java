@@ -42,10 +42,8 @@ public class ArticleServiceImpl implements ArticleService {
             throw new BaseException(ErrorMessage.INSUFFICIENT_REQUEST_DATA);
         }
 
-        List<Article> articles = articleRepository.findAllByUser_UserIdAndPrompt_PromptId(articleReqDto.getUserId(), articleReqDto.getPromptId());
-
         Article savedArticle = null;
-        if (articleReqDto.getArticleId() == null && articles.isEmpty()) {
+        if (articleReqDto.getArticleId() == null) {
             savedArticle = saveNewArticle(articleReqDto);
         }
         else {

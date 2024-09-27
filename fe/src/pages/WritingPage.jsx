@@ -9,11 +9,15 @@ import Copying from '@/components/writing/Copying';
 import Writing from '@/components/writing/Writing';
 import Translating from '@/components/writing/Translating';
 import { ClipLoader } from 'react-spinners';
+import { useQuery } from '@tanstack/react-query';
 
+// state로 받은 articleId의 글을 뿌려준다.
+// 만일 articleId가 null이면, prompt로 쓴 제일 최신 글을 뿌려준다.
+// 만일 prompt로 글을 쓴 적이 한 번도 없다면 빈 글을 저장한다.
 export default function WritingPage() {
     const navigate = useNavigate();
     const location = useLocation();
-    const { prompt, latestArticle } = location.state || {};
+    const { articleId, prompt } = location.state || {};
 
     const [isOpen, setIsOpen] = useState(true);
     const [article, setArticle] = useState(null);
@@ -24,6 +28,7 @@ export default function WritingPage() {
         setIsOpen((prev) => !prev);
     };
 
+    // articleId로 article 가져오기 (맨 처음에 뿌려주기 용)
     const fetchArticle = async (articleId) => {
         const response = await authAxios.get(`/article/${articleId}`);
         setArticle(response.data);
@@ -31,13 +36,37 @@ export default function WritingPage() {
         return response.data;
     };
 
-    useEffect(() => {
-        if (latestArticle != null) {
-            fetchArticle(latestArticle.articleId);
-        }
-    }, [prompt]);
+    // promptId에 대해 유저가 쓴 모든 글 불러오기
+    const fetchArticles = async () => {
+        const queryString = [`sort=latest`, `promptId=${prompt.promptId}`].filter(Boolean).join('&');
+        const response = await authAxios.get(`/article?${queryString}`);
+        return response.data.content;
+    };
 
-    const saveArticle = () => {
+    const { data: articles } = useQuery({
+        queryKey: ['articles', article],
+        queryFn: fetchArticles,
+    });
+
+    // 맨 처음에 실행되고 모든 글 목록을 가져오면
+    useEffect(() => {
+        if (article != null) {
+            // articleId 값이 있다면
+            if (articleId != null) {
+                fetchArticle(article.articleId);
+            }
+            // 과거에 쓴 글이 있다면
+            else if (articles.length() > 0) {
+                setArticle(articles[0]);
+            }
+            // 첫 글이라면
+            else {
+                saveArticle();
+            }
+        }
+    }, []);
+
+    const saveArticle = async () => {
         const articleReqDto = { body: text, promptId: prompt.promptId };
 
         // 첫 저장이 아니라면
@@ -45,7 +74,7 @@ export default function WritingPage() {
             articleReqDto.articleId = article.articleId;
         }
 
-        authAxios.post('/article', articleReqDto).then((response) => setArticle(response.data));
+        await authAxios.post('/article', articleReqDto).then((response) => setArticle(response.data));
     };
 
     const submitArticle = async () => {
@@ -106,7 +135,7 @@ export default function WritingPage() {
                     <ClipLoader color={'#36d7b7'} loading={loading} size={50} />
                 </div>
             )}
-            <Sidebar isOpen={isOpen} toggleSidebar={toggleSidebar} />
+            <Sidebar isOpen={isOpen} toggleSidebar={toggleSidebar} promptId={prompt.promptId} article={article} />
             <div className={styles.subContainer}>
                 <div className={styles.menus}>
                     <div className={styles.metaData}>

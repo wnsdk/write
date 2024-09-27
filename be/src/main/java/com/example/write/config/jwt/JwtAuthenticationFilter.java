@@ -83,7 +83,7 @@ public class JwtAuthenticationFilter extends OncePerRequestFilter {
 
                     // TODO : user 가 ACTIVE 상태인지 체크
                     if (optionalUser.isEmpty()) {
-                        throw new BaseException(ErrorMessage.NOT_EXIST_USER);
+                        throw new BaseException(ErrorMessage.USER_NOT_EXIST);
                     }
 
                     User user = optionalUser.get();

@@ -16,17 +16,17 @@ import java.time.LocalDateTime;
 @Table(name = "article")
 public class Article extends BaseTimeEntity {
 
-    @EmbeddedId
-    private ArticleId articleId; // 고유 글 ID
+    @Id
+    @GeneratedValue(strategy = GenerationType.IDENTITY)
+    @Column(name = "article_id")
+    private Long articleId;
 
     @ManyToOne(fetch = FetchType.EAGER)
-    @MapsId("userId")
     @JoinColumn(name = "user_id", nullable = false)
     @JsonBackReference  // article을 직렬화할 때는 user 정보가 직렬화된다.
     private User user; // 작성한 유저
 
     @ManyToOne(fetch = FetchType.EAGER)
-    @MapsId("promptId")
     @JoinColumn(name = "prompt_id", nullable = false)
     @JsonBackReference
     private Prompt prompt; // 관련 글감

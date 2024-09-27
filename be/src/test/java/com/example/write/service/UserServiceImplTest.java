@@ -1,20 +1,18 @@
-package com.example.write;
+package com.example.write.service;
 
+import com.example.write.WriteApplication;
 import com.example.write.domain.entity.User;
 import com.example.write.domain.enums.Provider;
 import com.example.write.domain.enums.Role;
 import com.example.write.domain.enums.Status;
 import com.example.write.exception.BaseException;
 import com.example.write.repository.UserRepository;
-import com.example.write.service.UserService;
 import org.junit.jupiter.api.AfterEach;
 import org.junit.jupiter.api.BeforeEach;
 import org.junit.jupiter.api.DisplayName;
 import org.junit.jupiter.api.Test;
 import org.springframework.beans.factory.annotation.Autowired;
 import org.springframework.boot.test.context.SpringBootTest;
-import org.springframework.test.context.ActiveProfiles;
-import org.springframework.test.context.TestPropertySource;
 
 import static org.junit.jupiter.api.Assertions.*;
 
@@ -36,7 +34,7 @@ class UserServiceImplTest {
     private String provider;
 
     @BeforeEach
-    private void beforeEach() {
+    private void setUp() {
         name = "홍길동";
         email = "gildong@example.com";
         profile = "https://bit.ly/3X85b5g";
@@ -45,7 +43,7 @@ class UserServiceImplTest {
     }
 
     @AfterEach
-    private void afterEach() {
+    private void tearDown() {
         userRepository.deleteAll();
     }
 

@@ -14,6 +14,7 @@ import java.time.LocalDateTime;
 @Builder
 @ToString
 public class ArticleResDto {
+    private Long articleId;
 
     private PromptResDto promptResDto; // 관련 글감
 

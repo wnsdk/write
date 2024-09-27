@@ -191,6 +191,7 @@ public class PromptServiceImpl implements PromptService {
 
     private static PromptResDto convertToDto(PromptReqDto promptReqDto) {
         PromptResDto promptResDto = PromptResDto.builder()
+                .promptId(promptReqDto.getPromptId())
                 .category(promptReqDto.getCategory())
                 .mode(promptReqDto.getMode())
                 .difficulty(promptReqDto.getDifficulty())
@@ -206,6 +207,7 @@ public class PromptServiceImpl implements PromptService {
 
     private static PromptResDto convertToDto(Prompt prompt, List<String> tagNames) {
         return PromptResDto.builder()
+                .promptId(prompt.getPromptId())
                 .category(prompt.getCategory())
                 .mode(prompt.getMode())
                 .difficulty(prompt.getDifficulty())
